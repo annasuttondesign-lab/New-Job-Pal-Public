@@ -4,7 +4,7 @@
 > Run `npm run gen:api-routes` to regenerate.
 > Generated: 2026-02-19
 
-**Total routes: 39**
+**Total routes: 41**
 
 ## Profile & Settings
 
@@ -13,6 +13,8 @@
 | GET | `/api/profile` | Get profile |
 | POST | `/api/profile` | Create/process profile |
 | POST | `/api/settings/api-key` | Create/process api key |
+| GET | `/api/settings/export` | Get export |
+| POST | `/api/settings/import` | Create/process import |
 
 ## Resumes
 

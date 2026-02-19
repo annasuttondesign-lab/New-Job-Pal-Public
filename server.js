@@ -207,6 +207,123 @@ app.post('/api/settings/api-key', (req, res) => {
   }
 });
 
+// Mapping of camelCase export keys to data filenames
+const DATA_KEY_MAP = {
+  profile: 'profile.json',
+  jobs: 'jobs.json',
+  resumes: 'resumes.json',
+  coverLetters: 'cover-letters.json',
+  writingSamples: 'writing-samples.json',
+  contacts: 'contacts.json',
+  mockInterviews: 'mock-interviews.json',
+  customBoards: 'custom-boards.json',
+  documentTemplates: 'document-templates.json'
+};
+
+app.get('/api/settings/export', (req, res) => {
+  try {
+    // Build data object from all data files
+    const data = {};
+    for (const [key, filename] of Object.entries(DATA_KEY_MAP)) {
+      data[key] = loadData(filename);
+    }
+
+    // Read API key from .env
+    let apiKey = '';
+    const envFilePath = path.join(__dirname, '.env');
+    if (fs.existsSync(envFilePath)) {
+      const envContent = fs.readFileSync(envFilePath, 'utf-8');
+      for (const line of envContent.split('\n')) {
+        const trimmed = line.trim();
+        if (trimmed.startsWith('ANTHROPIC_API_KEY=')) {
+          apiKey = trimmed.slice('ANTHROPIC_API_KEY='.length).trim().replace(/^["']|["']$/g, '');
+          break;
+        }
+      }
+    }
+
+    const exportPayload = {
+      exportVersion: 1,
+      exportedAt: new Date().toISOString(),
+      appName: 'New Job Pal',
+      apiKey,
+      data
+    };
+
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+    res.setHeader('Content-Disposition', `attachment; filename="new-job-pal-export-${timestamp}.json"`);
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(exportPayload, null, 2));
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to export data', details: err.message });
+  }
+});
+
+app.post('/api/settings/import', (req, res) => {
+  try {
+    const body = req.body;
+    if (!body || typeof body !== 'object') {
+      return res.status(400).json({ error: 'Invalid import file: no body' });
+    }
+    if (!body.data || typeof body.data !== 'object') {
+      return res.status(400).json({ error: 'Invalid import file: missing "data" property' });
+    }
+    if (body.exportVersion && body.exportVersion > 1) {
+      return res.status(400).json({ error: `Unsupported export version: ${body.exportVersion}. Please update New Job Pal.` });
+    }
+
+    // Validate types before writing anything
+    for (const [key, value] of Object.entries(body.data)) {
+      if (!(key in DATA_KEY_MAP)) continue; // ignore unknown keys
+      if (key === 'profile') {
+        if (typeof value !== 'object' || Array.isArray(value)) {
+          return res.status(400).json({ error: `Invalid data: "${key}" must be an object` });
+        }
+      } else {
+        if (!Array.isArray(value)) {
+          return res.status(400).json({ error: `Invalid data: "${key}" must be an array` });
+        }
+      }
+    }
+
+    // Write each present key
+    for (const [key, filename] of Object.entries(DATA_KEY_MAP)) {
+      if (key in body.data) {
+        saveData(filename, body.data[key]);
+      }
+    }
+
+    // Update API key if provided
+    if (body.apiKey && typeof body.apiKey === 'string' && body.apiKey.trim()) {
+      const trimmedKey = body.apiKey.trim();
+      const envFilePath = path.join(__dirname, '.env');
+      let envContent = '';
+      if (fs.existsSync(envFilePath)) {
+        envContent = fs.readFileSync(envFilePath, 'utf-8');
+      }
+      const lines = envContent.split('\n');
+      let found = false;
+      const updatedLines = lines.map((line) => {
+        if (line.trim().startsWith('ANTHROPIC_API_KEY=')) {
+          found = true;
+          return `ANTHROPIC_API_KEY=${trimmedKey}`;
+        }
+        return line;
+      });
+      if (!found) {
+        updatedLines.push(`ANTHROPIC_API_KEY=${trimmedKey}`);
+      }
+      fs.writeFileSync(envFilePath, updatedLines.join('\n'), 'utf-8');
+      process.env.ANTHROPIC_API_KEY = trimmedKey;
+      client.apiKey = trimmedKey;
+    }
+
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to import data', details: err.message });
+  }
+});
+
 // ---------------------------------------------------------------------------
 // ROUTES: Resume Upload & Parse
 // ---------------------------------------------------------------------------

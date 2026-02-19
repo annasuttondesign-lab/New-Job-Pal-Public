@@ -10,7 +10,7 @@
 
 | Variable | Example Value | In .env.example | Used In |
 |----------|--------------|-----------------|----------|
-| `ANTHROPIC_API_KEY` | `your-api-key-here` | ✅ | server.js:32, server.js:201 |
+| `ANTHROPIC_API_KEY` | `your-api-key-here` | ✅ | server.js:32, server.js:201, server.js:317 |
 
 ## Server
 

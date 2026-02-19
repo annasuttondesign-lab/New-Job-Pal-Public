@@ -14,6 +14,7 @@ let jobsCache = [];
 let profileSkills = [];
 let profileCertifications = [];
 let modalConfirmCallback = null;
+let profileDirty = false;
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // CORE UTILITIES
@@ -395,6 +396,9 @@ async function loadProfile() {
 
     // Load templates
     loadTemplates();
+
+    // Loading saved data shouldn't count as a change
+    resetProfileDirty();
   } catch (err) {
     console.error('Failed to load profile:', err);
   }
@@ -422,6 +426,7 @@ function renderSkillTags() {
       const idx = parseInt(btn.dataset.index, 10);
       profileSkills.splice(idx, 1);
       renderSkillTags();
+      markProfileDirty();
     });
   });
 }
@@ -435,6 +440,7 @@ function setupSkillInput() {
     if (val && !profileSkills.includes(val)) {
       profileSkills.push(val);
       renderSkillTags();
+      markProfileDirty();
     }
     input.value = '';
     input.focus();
@@ -467,6 +473,7 @@ function renderCertTags() {
       const idx = parseInt(btn.dataset.index, 10);
       profileCertifications.splice(idx, 1);
       renderCertTags();
+      markProfileDirty();
     });
   });
 }
@@ -480,6 +487,7 @@ function setupCertInput() {
     if (val && !profileCertifications.includes(val)) {
       profileCertifications.push(val);
       renderCertTags();
+      markProfileDirty();
     }
     input.value = '';
     input.focus();
@@ -531,6 +539,7 @@ function addExperienceEntry(data = {}) {
       btn.addEventListener('click', () => {
         fieldTags.splice(parseInt(btn.dataset.index, 10), 1);
         renderFieldTags();
+        markProfileDirty();
       });
     });
   }
@@ -540,6 +549,7 @@ function addExperienceEntry(data = {}) {
     if (val && !fieldTags.includes(val)) {
       fieldTags.push(val);
       renderFieldTags();
+      markProfileDirty();
     }
     fieldInput.value = '';
     fieldInput.focus();
@@ -561,7 +571,7 @@ function addExperienceEntry(data = {}) {
   // Remove button
   const removeBtn = entry.querySelector('.btn--remove-entry');
   if (removeBtn) {
-    removeBtn.addEventListener('click', () => entry.remove());
+    removeBtn.addEventListener('click', () => { entry.remove(); markProfileDirty(); });
   }
 
   renderFieldTags();
@@ -571,7 +581,7 @@ function addExperienceEntry(data = {}) {
 function setupExperienceButton() {
   const btn = document.getElementById('profile-add-experience');
   if (btn) {
-    btn.addEventListener('click', () => addExperienceEntry());
+    btn.addEventListener('click', () => { addExperienceEntry(); markProfileDirty(); });
   }
 }
 
@@ -592,7 +602,7 @@ function addEducationEntry(data = {}) {
 
   const removeBtn = entry.querySelector('.btn--remove-entry');
   if (removeBtn) {
-    removeBtn.addEventListener('click', () => entry.remove());
+    removeBtn.addEventListener('click', () => { entry.remove(); markProfileDirty(); });
   }
 
   list.appendChild(entry);
@@ -601,7 +611,7 @@ function addEducationEntry(data = {}) {
 function setupEducationButton() {
   const btn = document.getElementById('profile-add-education');
   if (btn) {
-    btn.addEventListener('click', () => addEducationEntry());
+    btn.addEventListener('click', () => { addEducationEntry(); markProfileDirty(); });
   }
 }
 
@@ -687,6 +697,7 @@ function setupResumeUpload() {
         parsed.education.forEach(edu => addEducationEntry(edu));
       }
 
+      markProfileDirty();
       showToast('Resume parsed! Review your profile below and click Save when ready.', 'success');
 
       // Scroll to the form so the user can review
@@ -868,11 +879,36 @@ async function loadDocumentHistory(jobId) {
   }
 }
 
+// ── Profile Dirty State ──
+
+function markProfileDirty() {
+  if (profileDirty) return;
+  profileDirty = true;
+  const btn = document.getElementById('profile-save-sticky');
+  if (btn) btn.classList.add('has-changes');
+}
+
+function resetProfileDirty() {
+  profileDirty = false;
+  const btn = document.getElementById('profile-save-sticky');
+  if (btn) btn.classList.remove('has-changes');
+}
+
 // ── Profile Save ──
 
 function setupProfileForm() {
   const form = document.getElementById('profile-form');
   if (!form) return;
+
+  // Wire the sticky save button to trigger form submit
+  const stickyBtn = document.getElementById('profile-save-sticky');
+  if (stickyBtn) {
+    stickyBtn.addEventListener('click', () => form.requestSubmit());
+  }
+
+  // Track dirty state via event delegation on the form
+  form.addEventListener('input', markProfileDirty);
+  form.addEventListener('change', markProfileDirty);
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -924,6 +960,7 @@ function setupProfileForm() {
         method: 'POST',
         body: JSON.stringify(profile),
       });
+      resetProfileDirty();
       showToast('Profile saved successfully!', 'success');
     } catch (err) {
       showToast(`Failed to save profile: ${err.message}`, 'error');
@@ -2243,36 +2280,73 @@ function setupSettings() {
           <p class="form-hint">Stored server-side in your .env file. Leave blank to keep the current key.</p>
         </div>
         <div>
-          <label class="form-label">Data</label>
-          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:8px;">Your profile, jobs, and writing samples are saved locally in the <code>data/</code> folder.</p>
+          <label class="form-label">Export</label>
+          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:8px;">Download all your data (profile, jobs, resumes, cover letters, contacts, writing samples, mock interviews, custom boards, document template metadata, and API key) as a single JSON file.</p>
           <button type="button" id="settings-export" class="btn btn--outline btn--small">Export All Data</button>
+        </div>
+        <div style="border-top:1px solid var(--border);padding-top:16px;">
+          <label class="form-label">Import</label>
+          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:8px;">Upload a previously exported JSON file. This will <strong>replace</strong> all your current data — it cannot be undone.</p>
+          <input type="file" id="settings-import-file" accept=".json" style="margin-bottom:8px;">
+          <button type="button" id="settings-import" class="btn btn--outline btn--small" disabled>Upload Data</button>
+          <p class="form-hint">Document template files (.docx) are not included in exports and will need to be re-uploaded.</p>
         </div>
       </div>`;
 
-    // Wire up export button
+    // Wire up export button — server-side download
     const exportBtn = document.getElementById('settings-export');
     if (exportBtn) {
-      exportBtn.addEventListener('click', async () => {
+      exportBtn.addEventListener('click', () => {
+        window.location.href = '/api/settings/export';
+        showToast('Data exported!', 'success');
+      });
+    }
+
+    // Wire up import file input and button
+    const importFileInput = document.getElementById('settings-import-file');
+    const importBtn = document.getElementById('settings-import');
+    if (importFileInput && importBtn) {
+      importFileInput.addEventListener('change', () => {
+        importBtn.disabled = !importFileInput.files.length;
+      });
+
+      importBtn.addEventListener('click', async () => {
+        const file = importFileInput.files[0];
+        if (!file) return;
+
+        let parsed;
         try {
-          const [profile, jobs, samples, contacts] = await Promise.all([
-            api('/api/profile'),
-            api('/api/jobs'),
-            api('/api/writing-samples'),
-            api('/api/contacts'),
-          ]);
-          const exportData = { profile, jobs, writingSamples: samples, contacts, exportedAt: new Date().toISOString() };
-          const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = 'job-pal-export.json';
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          URL.revokeObjectURL(url);
-          showToast('Data exported!', 'success');
+          const text = await file.text();
+          parsed = JSON.parse(text);
+        } catch {
+          showToast('Invalid JSON file.', 'error');
+          return;
+        }
+
+        if (!parsed.data || typeof parsed.data !== 'object') {
+          showToast('Invalid export file: missing "data" property.', 'error');
+          return;
+        }
+
+        if (!confirm('This will replace ALL your current data. This cannot be undone. Continue?')) {
+          return;
+        }
+
+        try {
+          showLoading('Importing data...');
+          await api('/api/settings/import', {
+            method: 'POST',
+            body: JSON.stringify(parsed),
+          });
+          hideLoading();
+          showToast('Data imported successfully!', 'success');
+          closeModal();
+          // Reload the current page to reflect imported data
+          const currentPage = document.querySelector('.page.active');
+          if (currentPage) navigateTo(currentPage.id);
         } catch (err) {
-          showToast(`Export failed: ${err.message}`, 'error');
+          hideLoading();
+          showToast(`Import failed: ${err.message}`, 'error');
         }
       });
     }
