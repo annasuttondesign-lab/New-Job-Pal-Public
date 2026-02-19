@@ -748,28 +748,13 @@ body::after {
       </div>
     </div>
     <div class="step-body">
-      <p>
-        In the project's root folder (the same folder where <code style="background:var(--bg-secondary);padding:1px 5px;border-radius:3px;font-size:0.85rem;border:1px solid var(--border-light);">package.json</code> lives), create a new file called <strong>.env</strong> with this content:
-      </p>
-
-      <div class="file-block">
-        <div class="file-block-header">
-          <span class="file-block-name">.env</span>
-          <button class="copy-btn" data-copy="ANTHROPIC_API_KEY=your-api-key-here&#10;PORT=3000" style="background:var(--bg-primary);border-color:var(--border);color:var(--text-muted);">Copy</button>
-        </div>
-        <pre>ANTHROPIC_API_KEY=your-api-key-here
-PORT=3000</pre>
-      </div>
-
-      <p>
-        Replace <code style="background:var(--bg-secondary);padding:1px 5px;border-radius:3px;font-size:0.85rem;border:1px solid var(--border-light);">your-api-key-here</code> with the key you got in Step 3.
-      </p>
-
       <div class="explain">
-        <strong>What's a .env file?</strong> It's a simple text file that stores private settings (like passwords and API keys) that your app reads on startup. The dot at the beginning makes it a hidden file on Mac/Linux.
+        <strong>What's a .env file?</strong> It's a simple text file that stores private settings (like API keys) that your app reads on startup. The dot at the beginning makes it a hidden file on Mac/Linux. It's already in <code style="background:#E8E4F0;padding:1px 5px;border-radius:3px;font-size:0.85rem;">.gitignore</code>, so it will never be uploaded to GitHub.
       </div>
 
-      <p><strong>Quick way to create it from the terminal:</strong></p>
+      <p>
+        The project includes a template called <code style="background:var(--bg-secondary);padding:1px 5px;border-radius:3px;font-size:0.85rem;border:1px solid var(--border-light);">.env.example</code>. The fastest way to set up is to copy it in your terminal:
+      </p>
 
       <div class="command-block">
         <span class="command-text">cp .env.example .env</span>
@@ -777,14 +762,38 @@ PORT=3000</pre>
       </div>
 
       <div class="explain">
-        <strong>What this does:</strong> Copies the example file to a new <code style="background:#E8E4F0;padding:1px 5px;border-radius:3px;font-size:0.85rem;">.env</code> file. Then open it in any text editor and paste in your real API key.
+        <strong>What this does:</strong> Creates a new file called <code style="background:#E8E4F0;padding:1px 5px;border-radius:3px;font-size:0.85rem;">.env</code> by copying the template. The template already has the right format &mdash; you just need to paste in your real API key.
       </div>
+
+      <p>Now open <code style="background:var(--bg-secondary);padding:1px 5px;border-radius:3px;font-size:0.85rem;border:1px solid var(--border-light);">.env</code> in any text editor (VS Code, Notepad, TextEdit &mdash; anything works). You'll see this:</p>
+
+      <div class="file-block">
+        <div class="file-block-header">
+          <span class="file-block-name">.env</span>
+        </div>
+        <pre>ANTHROPIC_API_KEY=your-api-key-here
+PORT=3000</pre>
+      </div>
+
+      <p>
+        Replace <code style="background:var(--bg-secondary);padding:1px 5px;border-radius:3px;font-size:0.85rem;border:1px solid var(--border-light);">your-api-key-here</code> with the real API key you got in Step 3 (the one starting with <code style="background:var(--bg-secondary);padding:1px 5px;border-radius:3px;font-size:0.85rem;border:1px solid var(--border-light);">sk-ant-</code>). Leave <code style="background:var(--bg-secondary);padding:1px 5px;border-radius:3px;font-size:0.85rem;border:1px solid var(--border-light);">PORT=3000</code> as-is. Save the file.
+      </p>
+
+      <details class="troubleshoot">
+        <summary>Prefer to create the file manually instead?</summary>
+        <div class="troubleshoot-content">
+          <p><strong>Option A &mdash; From your text editor:</strong> Open VS Code (or any editor), create a new file, paste in the two lines above (with your real key), and save it as <code>.env</code> in the project's root folder (the same folder where <code>package.json</code> lives). Make sure the file is named exactly <code>.env</code> with no <code>.txt</code> extension.</p>
+          <p><strong>Option B &mdash; From the terminal on Mac/Linux:</strong></p>
+          <p style="margin-bottom:4px;"><code>echo "ANTHROPIC_API_KEY=sk-ant-YOUR-KEY-HERE" > .env && echo "PORT=3000" >> .env</code></p>
+          <p>Replace <code>sk-ant-YOUR-KEY-HERE</code> with your actual key.</p>
+        </div>
+      </details>
 
       <details class="troubleshoot">
         <summary>Having trouble?</summary>
         <div class="troubleshoot-content">
-          <p><strong>Can't see the file?</strong> Files starting with a dot are hidden by default. On Mac Finder, press <code>Cmd + Shift + .</code> to toggle hidden files. On Windows, enable "Show hidden files" in File Explorer options.</p>
-          <p><strong>Text editor suggestions:</strong> VS Code, Notepad++, or even plain Notepad will work. Just make sure the file is named exactly <code>.env</code> (no <code>.txt</code> extension).</p>
+          <p><strong>Can't see the file after creating it?</strong> Files starting with a dot are hidden by default. On Mac Finder, press <code>Cmd + Shift + .</code> to toggle hidden files. On Windows, enable "Show hidden files" in File Explorer options.</p>
+          <p><strong>Windows users:</strong> The <code>cp</code> command might not work in Command Prompt. Use <code>copy .env.example .env</code> instead, or just create the file manually with Notepad.</p>
         </div>
       </details>
 
