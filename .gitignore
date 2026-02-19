@@ -1,9 +1,17 @@
 node_modules/
-.env
 data/
+.claude/
+
+# Sensitive files — never commit
+.env
+.env.local
+IMPLEMENTATION-PLAN.md
+*.rtf
+.git-scrubbed/
 
 # OS files
 .DS_Store
+Thumbs.db
 
 # Editor files
 *.swp

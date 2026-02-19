@@ -24,6 +24,9 @@ New Job Pal is a Node.js/Express application that helps job seekers manage their
 - **data/*.json** — Persistent storage (gitignored)
 - **data/templates/** — Document templates for docxtemplater
 - **data/generated/** — Generated DOCX files (gitignored)
+- **start-here.html** — Self-contained beginner setup guide (matches app design system)
+- **README.md** — GitHub landing page with quick-start and feature overview
+- **LICENSE** — MIT license
 
 ## Documentation Maintenance — Standing Instructions
 

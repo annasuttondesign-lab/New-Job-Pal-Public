@@ -11,13 +11,13 @@ This project uses **JSON file-based storage** (no database). All data files live
 | Data File | Default Type | Live Record Count |
 |-----------|-------------|-------------------|
 | profile.json | Object | N/A |
-| jobs.json | Array | 9 |
-| resumes.json | Array | 4 |
-| cover-letters.json | Array | 3 |
-| writing-samples.json | Array | 2 |
+| jobs.json | Array | 0 |
+| resumes.json | Array | 0 |
+| cover-letters.json | Array | 0 |
+| writing-samples.json | Array | 0 |
 | document-templates.json | Array | 2 |
 | contacts.json | Array | 0 |
-| mock-interviews.json | Array | 1 |
+| mock-interviews.json | Array | 0 |
 | custom-boards.json | Array | 1 |
 
 ---
@@ -45,66 +45,28 @@ This project uses **JSON file-based storage** (no database). All data files live
 **File:** `data/jobs.json`  
 **Type:** Array of records  
 
-| Field | Type | Notes |
-|-------|------|-------|
-| id | string (UUID) |  |
-| title | string |  |
-| company | string |  |
-| location | string |  |
-| type | string |  |
-| url | string |  |
-| description | string |  |
-| createdAt | string (date) |  |
-| updatedAt | string (date) |  |
-| notes | string |  |
+*Empty by default. Schema inferred from code usage.*
 
 ## Resumes
 
 **File:** `data/resumes.json`  
 **Type:** Array of records  
 
-| Field | Type | Notes |
-|-------|------|-------|
-| id | string (UUID) |  |
-| jobId | string (UUID) |  |
-| jobTitle | string |  |
-| company | string |  |
-| resume | string |  |
-| changes | array of strings |  |
-| highlights | array of strings |  |
-| atsKeywords | array of strings |  |
-| createdAt | string (date) |  |
-| updatedAt | string (date) |  |
+*Empty by default. Schema inferred from code usage.*
 
 ## Cover Letters
 
 **File:** `data/cover-letters.json`  
 **Type:** Array of records  
 
-| Field | Type | Notes |
-|-------|------|-------|
-| id | string (UUID) |  |
-| jobId | string (UUID) |  |
-| jobTitle | string |  |
-| company | string |  |
-| coverLetter | string |  |
-| toneNotes | string |  |
-| keyPoints | array of strings |  |
-| createdAt | string (date) |  |
-| updatedAt | string (date) |  |
+*Empty by default. Schema inferred from code usage.*
 
 ## Writing Samples
 
 **File:** `data/writing-samples.json`  
 **Type:** Array of records  
 
-| Field | Type | Notes |
-|-------|------|-------|
-| id | string (UUID) |  |
-| title | string |  |
-| content | string |  |
-| type | string |  |
-| createdAt | string (date) |  |
+*Empty by default. Schema inferred from code usage.*
 
 ## Document Templates
 
@@ -132,15 +94,7 @@ This project uses **JSON file-based storage** (no database). All data files live
 **File:** `data/mock-interviews.json`  
 **Type:** Array of records  
 
-| Field | Type | Notes |
-|-------|------|-------|
-| id | string (UUID) |  |
-| jobId | string (UUID) |  |
-| messages | array of objects | Fields: role, content, questionType, tip |
-| questionCount | number |  |
-| feedback | object |  |
-| createdAt | string (date) |  |
-| completedAt | string (date) |  |
+*Empty by default. Schema inferred from code usage.*
 
 ## Custom Boards
 

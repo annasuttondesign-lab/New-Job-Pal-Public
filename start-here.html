@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Start Here — New Job Pal Setup Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   START-HERE — Artist's Sketchbook Design
+   Matches New Job Pal's visual language
+   ============================================ */
+:root {
+  --bg-primary: #F6F2EC;
+  --bg-secondary: #EDE8DF;
+  --bg-card: #FDFBF7;
+  --text-primary: #1E1E2C;
+  --text-secondary: #3D3A4A;
+  --text-muted: #6B6578;
+  --text-light: #958EA0;
+  --ink: #2D3142;
+  --ink-light: #4A4E69;
+  --ink-wash: rgba(45, 49, 66, 0.08);
+  --teal: #2E8B8E;
+  --teal-light: #B2D8D8;
+  --teal-bg: #EFF8F8;
+  --sienna: #B5634B;
+  --sienna-light: #E4C4B8;
+  --ochre: #C4932A;
+  --ochre-light: #EEDCAA;
+  --ochre-bg: #FDF9EE;
+  --violet: #6B5B95;
+  --violet-light: #C9C0DA;
+  --violet-bg: #F4F1F8;
+  --indigo: #4A6FA5;
+  --indigo-light: #B0C7E0;
+  --vermilion: #A63D40;
+  --vermilion-light: #E0B5B6;
+  --border: #D5CDBE;
+  --border-light: #E5DED2;
+  --border-sketch: #C2B9A7;
+  --shadow-sm: 0 1px 3px rgba(30, 30, 44, 0.06);
+  --shadow-md: 0 4px 14px rgba(30, 30, 44, 0.08);
+  --shadow-lg: 0 8px 30px rgba(30, 30, 44, 0.10);
+  --shadow-page: 2px 3px 8px rgba(30, 30, 44, 0.07), -1px 0 4px rgba(30, 30, 44, 0.03);
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'EB Garamond', Georgia, serif;
+  --font-mono: 'DM Sans', 'SF Mono', 'Fira Code', monospace;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --transition-fast: 0.15s ease;
+  --transition-med: 0.3s ease;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.7;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Paper grain texture */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.7;
+}
+
+/* Watercolor wash at top */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; height: 500px;
+  background:
+    radial-gradient(ellipse at 15% 0%, rgba(46, 139, 142, 0.05) 0%, transparent 60%),
+    radial-gradient(ellipse at 85% 10%, rgba(196, 147, 42, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 5%, rgba(107, 91, 149, 0.04) 0%, transparent 55%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 48px 32px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ========== HEADER ========== */
+.hero {
+  text-align: center;
+  margin-bottom: 48px;
+  padding-bottom: 32px;
+  border-bottom: 1.5px solid var(--border-sketch);
+}
+.hero-logo {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+  opacity: 0.7;
+}
+.hero h1 {
+  font-family: var(--font-heading);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+.hero-tagline {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  max-width: 520px;
+  margin: 0 auto 16px;
+}
+.hero-note {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+.accent-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0 0;
+}
+.accent-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  opacity: 0.35;
+}
+
+/* ========== PROGRESS BAR ========== */
+.progress-section {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: 24px 28px;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-page);
+  margin-bottom: 40px;
+  text-align: center;
+}
+.progress-label {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+.progress-bar-track {
+  width: 100%;
+  height: 12px;
+  background: var(--bg-secondary);
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--teal), var(--violet));
+  border-radius: 6px;
+  transition: width 0.5s ease;
+  width: 0%;
+}
+.progress-text {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+  font-style: italic;
+}
+
+/* ========== STEPS ========== */
+.step {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  border: 1.5px solid var(--border-light);
+  box-shadow: var(--shadow-page);
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--transition-med), box-shadow var(--transition-med);
+}
+.step::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--teal), var(--ochre));
+  opacity: 0.4;
+}
+.step.completed {
+  border-color: var(--teal-light);
+}
+.step.completed::before {
+  background: var(--teal);
+  opacity: 0.6;
+}
+
+.step-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.step-number {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  border: 2px solid var(--border-sketch);
+  color: var(--ink);
+  background: var(--bg-primary);
+  position: relative;
+  transition: all var(--transition-med);
+}
+/* Watercolor wash behind step numbers */
+.step:nth-child(5n+1) .step-number { border-color: var(--teal); color: var(--teal); }
+.step:nth-child(5n+2) .step-number { border-color: var(--violet); color: var(--violet); }
+.step:nth-child(5n+3) .step-number { border-color: var(--ochre); color: var(--ochre); }
+.step:nth-child(5n+4) .step-number { border-color: var(--indigo); color: var(--indigo); }
+.step:nth-child(5n+5) .step-number { border-color: var(--sienna); color: var(--sienna); }
+
+.step.completed .step-number {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: white;
+}
+.step.completed .step-number::after {
+  content: '\2713';
+  font-size: 1.3rem;
+}
+.step.completed .step-number span {
+  display: none;
+}
+
+.step-title-group { flex: 1; }
+.step-title {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+.step-subtitle {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+  font-style: italic;
+}
+
+.step-body {
+  padding-left: 64px;
+}
+
+.step-body p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+.step-body p a {
+  color: var(--teal);
+  text-decoration: underline;
+  text-decoration-color: var(--teal-light);
+  text-underline-offset: 2px;
+  transition: color var(--transition-fast);
+}
+.step-body p a:hover {
+  color: var(--sienna);
+}
+
+/* Command blocks */
+.command-block {
+  background: var(--ink);
+  color: #E8E6F0;
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  margin: 12px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+}
+.command-block::before {
+  content: '$';
+  color: var(--teal);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.command-text {
+  flex: 1;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.copy-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #B0ADC0;
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.copy-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: white;
+}
+.copy-btn.copied {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: white;
+}
+
+/* File content blocks */
+.file-block {
+  background: var(--bg-secondary);
+  border: 1.5px solid var(--border-sketch);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  margin: 12px 0;
+  position: relative;
+}
+.file-block-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-light);
+}
+.file-block-name {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.file-block pre {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+/* Explain boxes */
+.explain {
+  background: var(--violet-bg);
+  border: 1px solid var(--violet-light);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  margin: 12px 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.explain strong {
+  color: var(--violet);
+}
+
+.explain--teal {
+  background: var(--teal-bg);
+  border-color: var(--teal-light);
+}
+.explain--teal strong {
+  color: var(--teal);
+}
+
+/* Checkbox for completion */
+.step-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-light);
+}
+.step-checkbox {
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--border-sketch);
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+.step-checkbox:checked {
+  background: var(--teal);
+  border-color: var(--teal);
+}
+.step-checkbox:checked::after {
+  content: '\2713';
+  position: absolute;
+  color: white;
+  font-size: 0.8rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.step-check-label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+/* ========== TROUBLESHOOTING ========== */
+.troubleshoot {
+  margin-top: 16px;
+}
+.troubleshoot summary {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-style: italic;
+  padding: 6px 0;
+  transition: color var(--transition-fast);
+}
+.troubleshoot summary:hover {
+  color: var(--text-secondary);
+}
+.troubleshoot-content {
+  background: var(--ochre-bg);
+  border: 1px solid var(--ochre-light);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  margin-top: 8px;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.troubleshoot-content code {
+  background: var(--bg-primary);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 0.85rem;
+  font-family: var(--font-mono);
+  color: var(--ink);
+  border: 1px solid var(--border-light);
+}
+.troubleshoot-content p {
+  margin-bottom: 8px;
+  font-size: 0.88rem;
+}
+.troubleshoot-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* ========== CELEBRATION ========== */
+.celebration {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: 40px 32px;
+  border: 1.5px solid var(--teal-light);
+  box-shadow: var(--shadow-page);
+  text-align: center;
+  margin-top: 40px;
+  position: relative;
+  overflow: hidden;
+}
+.celebration::before {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(46, 139, 142, 0.08) 0%, rgba(196, 147, 42, 0.05) 50%, transparent 70%);
+  pointer-events: none;
+}
+.celebration::after {
+  content: '';
+  position: absolute;
+  bottom: -20px; left: 60px;
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(107, 91, 149, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.celebration-icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+.celebration h2 {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+.celebration p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 440px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+.celebration-hidden {
+  display: none;
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  text-align: center;
+  padding: 32px 0;
+  color: var(--text-light);
+  font-size: 0.85rem;
+}
+.footer a {
+  color: var(--teal);
+  text-decoration: none;
+}
+.footer a:hover {
+  color: var(--sienna);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 600px) {
+  .container { padding: 24px 16px 60px; }
+  .hero h1 { font-size: 1.8rem; }
+  .step { padding: 24px 20px; }
+  .step-body { padding-left: 0; }
+  .step-header { flex-wrap: wrap; }
+  .step-number { width: 40px; height: 40px; font-size: 1.1rem; }
+  .command-block { flex-wrap: wrap; }
+  .copy-btn { margin-left: auto; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ========== HERO ========== -->
+  <header class="hero">
+    <div class="hero-logo">&#127800;</div>
+    <h1>Welcome to New Job Pal</h1>
+    <p class="hero-tagline">Let's get your AI-powered job search companion up and running.</p>
+    <p class="hero-note">
+      This guide walks you through every step. No experience needed &mdash;
+      each command is explained, and you can check off steps as you go.
+    </p>
+    <div class="accent-dots">
+      <span class="accent-dot" style="background: #2E8B8E; width: 10px; height: 10px;"></span>
+      <span class="accent-dot" style="background: #C4932A; width: 7px; height: 7px;"></span>
+      <span class="accent-dot" style="background: #6B5B95; width: 9px; height: 9px;"></span>
+      <span class="accent-dot" style="background: #4A6FA5; width: 6px; height: 6px;"></span>
+      <span class="accent-dot" style="background: #B5634B; width: 8px; height: 8px;"></span>
+    </div>
+  </header>
+
+  <!-- ========== PROGRESS ========== -->
+  <div class="progress-section">
+    <div class="progress-label">Your Setup Progress</div>
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-text" id="progressText">0 of 5 steps complete</div>
+  </div>
+
+  <!-- ========== STEP 1: Node.js ========== -->
+  <div class="step" data-step="1">
+    <div class="step-header">
+      <div class="step-number"><span>1</span></div>
+      <div class="step-title-group">
+        <div class="step-title">Install Node.js</div>
+        <div class="step-subtitle">The engine that runs the app</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>
+        Node.js lets your computer run JavaScript outside of a browser. New Job Pal's server is built with it.
+      </p>
+      <p>
+        Go to <a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a> and download the <strong>LTS</strong> (Long Term Support) version. Run the installer and accept the defaults.
+      </p>
+      <p>Once installed, verify it works by opening your <strong>Terminal</strong> (Mac) or <strong>Command Prompt</strong> (Windows) and running:</p>
+
+      <div class="command-block">
+        <span class="command-text">node --version</span>
+        <button class="copy-btn" data-copy="node --version">Copy</button>
+      </div>
+
+      <div class="explain">
+        <strong>What this does:</strong> Prints the version of Node.js you installed (e.g., <code style="background:#E8E4F0;padding:1px 5px;border-radius:3px;font-size:0.85rem;">v20.11.0</code>). If you see a version number, you're all set.
+      </div>
+
+      <details class="troubleshoot">
+        <summary>Having trouble?</summary>
+        <div class="troubleshoot-content">
+          <p><strong>"command not found"</strong> &mdash; Close your terminal and reopen it. The installer needs a fresh terminal to register.</p>
+          <p><strong>Mac users:</strong> If you use Homebrew, you can also install with <code>brew install node</code>.</p>
+          <p><strong>Need more help?</strong> The official <a href="https://nodejs.org/en/download/" target="_blank" rel="noopener" style="color:var(--teal);">Node.js download page</a> has guides for every operating system.</p>
+        </div>
+      </details>
+
+      <div class="step-check">
+        <input type="checkbox" class="step-checkbox" data-step="1" id="check1">
+        <label class="step-check-label" for="check1">Node.js is installed and working</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== STEP 2: Download the Project ========== -->
+  <div class="step" data-step="2">
+    <div class="step-header">
+      <div class="step-number"><span>2</span></div>
+      <div class="step-title-group">
+        <div class="step-title">Download the Project</div>
+        <div class="step-subtitle">Get the code onto your computer</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>
+        If you downloaded this as a ZIP file, unzip it and open a terminal in that folder.
+        If you're using Git, clone the repository:
+      </p>
+
+      <div class="command-block">
+        <span class="command-text">git clone https://github.com/yourusername/new-job-pal.git</span>
+        <button class="copy-btn" data-copy="git clone https://github.com/yourusername/new-job-pal.git">Copy</button>
+      </div>
+
+      <p>Then navigate into the project folder:</p>
+
+      <div class="command-block">
+        <span class="command-text">cd new-job-pal</span>
+        <button class="copy-btn" data-copy="cd new-job-pal">Copy</button>
+      </div>
+
+      <div class="explain">
+        <strong>What <code style="background:#E8E4F0;padding:1px 5px;border-radius:3px;font-size:0.85rem;">cd</code> does:</strong> "Change directory" &mdash; it moves your terminal into the project folder so the next commands know where to look.
+      </div>
+
+      <p>Now install the dependencies (libraries the app needs):</p>
+
+      <div class="command-block">
+        <span class="command-text">npm install</span>
+        <button class="copy-btn" data-copy="npm install">Copy</button>
+      </div>
+
+      <div class="explain">
+        <strong>What this does:</strong> Reads the <code style="background:#E8E4F0;padding:1px 5px;border-radius:3px;font-size:0.85rem;">package.json</code> file and downloads everything the app needs into a <code style="background:#E8E4F0;padding:1px 5px;border-radius:3px;font-size:0.85rem;">node_modules</code> folder. This may take a minute.
+      </div>
+
+      <details class="troubleshoot">
+        <summary>Having trouble?</summary>
+        <div class="troubleshoot-content">
+          <p><strong>"npm: command not found"</strong> &mdash; npm comes bundled with Node.js. Go back to Step 1 and make sure Node installed correctly.</p>
+          <p><strong>Permission errors on Mac/Linux:</strong> Try <code>sudo npm install</code> and enter your password. (Better long-term fix: <a href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally" target="_blank" rel="noopener" style="color:var(--teal);">fix npm permissions</a>.)</p>
+        </div>
+      </details>
+
+      <div class="step-check">
+        <input type="checkbox" class="step-checkbox" data-step="2" id="check2">
+        <label class="step-check-label" for="check2">Project downloaded and dependencies installed</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== STEP 3: API Key ========== -->
+  <div class="step" data-step="3">
+    <div class="step-header">
+      <div class="step-number"><span>3</span></div>
+      <div class="step-title-group">
+        <div class="step-title">Get Your API Key</div>
+        <div class="step-subtitle">The key that powers the AI features</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>
+        New Job Pal uses Claude (by Anthropic) for its AI features &mdash; resume generation, cover letters, mock interviews, and more. You'll need an API key to connect.
+      </p>
+
+      <ol style="padding-left: 20px; margin: 12px 0; list-style: decimal;">
+        <li style="margin-bottom: 8px; font-size: 0.95rem; color: var(--text-secondary);">
+          Go to <a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a>
+        </li>
+        <li style="margin-bottom: 8px; font-size: 0.95rem; color: var(--text-secondary);">
+          Create a free account (or sign in)
+        </li>
+        <li style="margin-bottom: 8px; font-size: 0.95rem; color: var(--text-secondary);">
+          Add a payment method under <strong>Billing</strong> (AI usage is pay-as-you-go; typical use costs pennies)
+        </li>
+        <li style="margin-bottom: 8px; font-size: 0.95rem; color: var(--text-secondary);">
+          Go to <strong>Settings &rarr; API Keys</strong> and click <strong>Create Key</strong>
+        </li>
+        <li style="font-size: 0.95rem; color: var(--text-secondary);">
+          Copy the key &mdash; it starts with <code style="background:var(--bg-secondary);padding:1px 5px;border-radius:3px;font-size:0.85rem;border:1px solid var(--border-light);">sk-ant-</code>
+        </li>
+      </ol>
+
+      <div class="explain--teal explain">
+        <strong>Keep it secret!</strong> Your API key is like a password. Never share it publicly or commit it to Git. The <code style="background:#E0F3F3;padding:1px 5px;border-radius:3px;font-size:0.85rem;">.env</code> file you'll create next is already in <code style="background:#E0F3F3;padding:1px 5px;border-radius:3px;font-size:0.85rem;">.gitignore</code>, so it won't be uploaded.
+      </div>
+
+      <details class="troubleshoot">
+        <summary>Having trouble?</summary>
+        <div class="troubleshoot-content">
+          <p><strong>Don't want to set up billing yet?</strong> The app will still run! You just won't be able to use AI features (resume generation, mock interviews, etc.) until you add a key. Everything else works fine.</p>
+        </div>
+      </details>
+
+      <div class="step-check">
+        <input type="checkbox" class="step-checkbox" data-step="3" id="check3">
+        <label class="step-check-label" for="check3">I have my API key (or I'll add it later)</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== STEP 4: Create .env ========== -->
+  <div class="step" data-step="4">
+    <div class="step-header">
+      <div class="step-number"><span>4</span></div>
+      <div class="step-title-group">
+        <div class="step-title">Create Your .env File</div>
+        <div class="step-subtitle">Where your private settings live</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>
+        In the project's root folder (the same folder where <code style="background:var(--bg-secondary);padding:1px 5px;border-radius:3px;font-size:0.85rem;border:1px solid var(--border-light);">package.json</code> lives), create a new file called <strong>.env</strong> with this content:
+      </p>
+
+      <div class="file-block">
+        <div class="file-block-header">
+          <span class="file-block-name">.env</span>
+          <button class="copy-btn" data-copy="ANTHROPIC_API_KEY=your-api-key-here&#10;PORT=3000" style="background:var(--bg-primary);border-color:var(--border);color:var(--text-muted);">Copy</button>
+        </div>
+        <pre>ANTHROPIC_API_KEY=your-api-key-here
+PORT=3000</pre>
+      </div>
+
+      <p>
+        Replace <code style="background:var(--bg-secondary);padding:1px 5px;border-radius:3px;font-size:0.85rem;border:1px solid var(--border-light);">your-api-key-here</code> with the key you got in Step 3.
+      </p>
+
+      <div class="explain">
+        <strong>What's a .env file?</strong> It's a simple text file that stores private settings (like passwords and API keys) that your app reads on startup. The dot at the beginning makes it a hidden file on Mac/Linux.
+      </div>
+
+      <p><strong>Quick way to create it from the terminal:</strong></p>
+
+      <div class="command-block">
+        <span class="command-text">cp .env.example .env</span>
+        <button class="copy-btn" data-copy="cp .env.example .env">Copy</button>
+      </div>
+
+      <div class="explain">
+        <strong>What this does:</strong> Copies the example file to a new <code style="background:#E8E4F0;padding:1px 5px;border-radius:3px;font-size:0.85rem;">.env</code> file. Then open it in any text editor and paste in your real API key.
+      </div>
+
+      <details class="troubleshoot">
+        <summary>Having trouble?</summary>
+        <div class="troubleshoot-content">
+          <p><strong>Can't see the file?</strong> Files starting with a dot are hidden by default. On Mac Finder, press <code>Cmd + Shift + .</code> to toggle hidden files. On Windows, enable "Show hidden files" in File Explorer options.</p>
+          <p><strong>Text editor suggestions:</strong> VS Code, Notepad++, or even plain Notepad will work. Just make sure the file is named exactly <code>.env</code> (no <code>.txt</code> extension).</p>
+        </div>
+      </details>
+
+      <div class="step-check">
+        <input type="checkbox" class="step-checkbox" data-step="4" id="check4">
+        <label class="step-check-label" for="check4">.env file created with my API key</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== STEP 5: Launch ========== -->
+  <div class="step" data-step="5">
+    <div class="step-header">
+      <div class="step-number"><span>5</span></div>
+      <div class="step-title-group">
+        <div class="step-title">Launch New Job Pal</div>
+        <div class="step-subtitle">The moment of truth</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>Start the server:</p>
+
+      <div class="command-block">
+        <span class="command-text">npm start</span>
+        <button class="copy-btn" data-copy="npm start">Copy</button>
+      </div>
+
+      <div class="explain">
+        <strong>What this does:</strong> Starts the New Job Pal server. You should see a message like
+        <code style="background:#E8E4F0;padding:1px 5px;border-radius:3px;font-size:0.85rem;">Job Pal running on http://localhost:3000</code> &mdash; that means it's working!
+      </div>
+
+      <p>
+        Open your browser and go to:
+      </p>
+
+      <div class="command-block" style="background: var(--teal); cursor: pointer;" onclick="window.open('http://localhost:3000','_blank')">
+        <span class="command-text" style="color: white;">http://localhost:3000</span>
+        <button class="copy-btn" data-copy="http://localhost:3000" style="background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.3);color:white;">Copy</button>
+      </div>
+
+      <p>
+        You should see the New Job Pal dashboard. Start by heading to the <strong>Profile</strong> section to enter your skills and experience &mdash; the AI uses this to personalize everything it generates for you.
+      </p>
+
+      <details class="troubleshoot">
+        <summary>Having trouble?</summary>
+        <div class="troubleshoot-content">
+          <p><strong>"Error: Cannot find module"</strong> &mdash; You may have skipped <code>npm install</code>. Go back to Step 2 and run it.</p>
+          <p><strong>"Port 3000 already in use"</strong> &mdash; Another app is using that port. Change <code>PORT=3000</code> to <code>PORT=3001</code> in your <code>.env</code> file and try again.</p>
+          <p><strong>To stop the server:</strong> Press <code>Ctrl + C</code> in the terminal where it's running.</p>
+        </div>
+      </details>
+
+      <div class="step-check">
+        <input type="checkbox" class="step-checkbox" data-step="5" id="check5">
+        <label class="step-check-label" for="check5">New Job Pal is running in my browser!</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== CELEBRATION ========== -->
+  <div class="celebration celebration-hidden" id="celebration">
+    <div class="celebration-icon">&#127800;</div>
+    <h2>You did it!</h2>
+    <p>
+      New Job Pal is ready to help you land your next role.
+      Head to <strong>Profile</strong> first, then start adding jobs. Good luck out there!
+    </p>
+  </div>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <p>New Job Pal is open source under the <a href="LICENSE">MIT License</a>.</p>
+    <p style="margin-top: 4px;">
+      Built with care using <a href="https://nodejs.org" target="_blank" rel="noopener">Node.js</a>,
+      <a href="https://expressjs.com" target="_blank" rel="noopener">Express</a>, and the
+      <a href="https://docs.anthropic.com" target="_blank" rel="noopener">Claude API</a>.
+    </p>
+  </footer>
+
+</div>
+
+<script>
+// ============================================
+// Start-Here Interactive Logic
+// ============================================
+
+(function() {
+  const STORAGE_KEY = 'jobpal-setup-progress';
+  const TOTAL_STEPS = 5;
+
+  // Load saved state
+  function loadState() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      return saved ? JSON.parse(saved) : {};
+    } catch {
+      return {};
+    }
+  }
+
+  // Save state
+  function saveState(state) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch {
+      // localStorage not available, that's fine
+    }
+  }
+
+  // Update progress bar and UI
+  function updateProgress() {
+    const state = loadState();
+    const completed = Object.values(state).filter(Boolean).length;
+    const pct = Math.round((completed / TOTAL_STEPS) * 100);
+
+    const fill = document.getElementById('progressFill');
+    const text = document.getElementById('progressText');
+    const celebration = document.getElementById('celebration');
+
+    if (fill) fill.style.width = pct + '%';
+    if (text) {
+      if (completed === TOTAL_STEPS) {
+        text.textContent = 'All done! \u2728';
+      } else {
+        text.textContent = completed + ' of ' + TOTAL_STEPS + ' steps complete';
+      }
+    }
+
+    // Update step cards
+    document.querySelectorAll('.step').forEach(function(step) {
+      const stepNum = step.getAttribute('data-step');
+      if (state[stepNum]) {
+        step.classList.add('completed');
+      } else {
+        step.classList.remove('completed');
+      }
+    });
+
+    // Show/hide celebration
+    if (celebration) {
+      if (completed === TOTAL_STEPS) {
+        celebration.classList.remove('celebration-hidden');
+      } else {
+        celebration.classList.add('celebration-hidden');
+      }
+    }
+  }
+
+  // Initialize checkboxes
+  document.querySelectorAll('.step-checkbox').forEach(function(cb) {
+    var stepNum = cb.getAttribute('data-step');
+    var state = loadState();
+
+    // Restore saved state
+    if (state[stepNum]) {
+      cb.checked = true;
+    }
+
+    // Handle changes
+    cb.addEventListener('change', function() {
+      var currentState = loadState();
+      currentState[this.getAttribute('data-step')] = this.checked;
+      saveState(currentState);
+      updateProgress();
+    });
+  });
+
+  // Copy-to-clipboard buttons
+  document.querySelectorAll('.copy-btn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var text = this.getAttribute('data-copy');
+      navigator.clipboard.writeText(text).then(function() {
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }).catch(function() {
+        // Fallback for older browsers
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    });
+  });
+
+  // Initial render
+  updateProgress();
+})();
+</script>
+
+</body>
+</html>
