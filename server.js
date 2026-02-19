@@ -4,7 +4,7 @@ const path = require('path');
 const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
 const Anthropic = require('@anthropic-ai/sdk');
-const { PDFParse } = require('pdf-parse');
+const pdfParse = require('pdf-parse');
 const PizZip = require('pizzip');
 const Docxtemplater = require('docxtemplater');
 
@@ -342,10 +342,8 @@ app.post('/api/resume/parse', upload.single('resume'), async (req, res) => {
     if (mimetype === 'application/pdf' || filename.endsWith('.pdf')) {
       // Parse PDF
       try {
-        const parser = new PDFParse({ data: req.file.buffer });
-        const pdfData = await parser.getText();
+        const pdfData = await pdfParse(req.file.buffer);
         text = pdfData.text || '';
-        await parser.destroy();
       } catch (pdfErr) {
         return res.status(400).json({ error: 'Could not read this PDF. It may be scanned/image-based. Try a .txt file or paste your resume instead.' });
       }
