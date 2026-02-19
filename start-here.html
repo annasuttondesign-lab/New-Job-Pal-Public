@@ -144,42 +144,117 @@ body::after {
   opacity: 0.35;
 }
 
-/* ========== PROGRESS BAR ========== */
-.progress-section {
+/* ========== HOW TO READ ========== */
+.how-to-read {
   background: var(--bg-card);
   border-radius: var(--radius-xl);
-  padding: 24px 28px;
-  border: 1px solid var(--border-light);
+  padding: 28px 32px;
+  border: 1.5px solid var(--border-light);
   box-shadow: var(--shadow-page);
-  margin-bottom: 40px;
+  margin-bottom: 28px;
+}
+.how-to-read-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+.how-to-read-items {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.how-to-read-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.how-to-read-item > div:first-child {
+  flex-shrink: 0;
+  width: 240px;
+}
+.how-to-read-item > p {
+  flex: 1;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+.how-to-read-terminal {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  padding: 14px 18px;
+  background: var(--teal-bg);
+  border: 1px solid var(--teal-light);
+  border-radius: var(--radius-md);
+}
+.how-to-read-terminal strong {
+  color: var(--teal);
+}
+.how-to-read-safety {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  padding: 14px 18px;
+  background: var(--violet-bg);
+  border: 1px solid var(--violet-light);
+  border-radius: var(--radius-md);
+  margin-top: 12px;
+}
+.how-to-read-safety strong {
+  color: var(--violet);
+}
+
+@media (max-width: 600px) {
+  .how-to-read { padding: 20px; }
+  .how-to-read-item { flex-direction: column; gap: 8px; }
+  .how-to-read-item > div:first-child { width: 100%; }
+}
+
+/* ========== PROGRESS BAR (sticky) ========== */
+.progress-section {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(253, 251, 247, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius-xl);
+  padding: 16px 28px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 4px 20px rgba(30, 30, 44, 0.08);
+  margin-bottom: 28px;
   text-align: center;
 }
 .progress-label {
   font-family: var(--font-heading);
-  font-size: 1rem;
+  font-size: 0.92rem;
   font-weight: 600;
   color: var(--text-secondary);
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 .progress-bar-track {
   width: 100%;
-  height: 12px;
+  height: 10px;
   background: var(--bg-secondary);
-  border-radius: 6px;
+  border-radius: 5px;
   overflow: hidden;
   border: 1px solid var(--border-light);
 }
 .progress-bar-fill {
   height: 100%;
   background: linear-gradient(90deg, var(--teal), var(--violet));
-  border-radius: 6px;
+  border-radius: 5px;
   transition: width 0.5s ease;
   width: 0%;
 }
 .progress-text {
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   color: var(--text-muted);
-  margin-top: 8px;
+  margin-top: 6px;
   font-style: italic;
 }
 
@@ -548,6 +623,7 @@ body::after {
 @media (max-width: 600px) {
   .container { padding: 24px 16px 60px; }
   .hero h1 { font-size: 1.8rem; }
+  .progress-section { padding: 12px 16px; margin-bottom: 24px; }
   .step { padding: 24px 20px; }
   .step-body { padding-left: 0; }
   .step-header { flex-wrap: wrap; }
@@ -563,7 +639,6 @@ body::after {
 
   <!-- ========== HERO ========== -->
   <header class="hero">
-    <div class="hero-logo">&#127800;</div>
     <h1>Welcome to New Job Pal</h1>
     <p class="hero-tagline">Let's get your AI-powered job search companion up and running.</p>
     <p class="hero-note">
@@ -578,6 +653,32 @@ body::after {
       <span class="accent-dot" style="background: #B5634B; width: 8px; height: 8px;"></span>
     </div>
   </header>
+
+  <!-- ========== HOW TO READ ========== -->
+  <div class="how-to-read">
+    <div class="how-to-read-title">How to read these instructions</div>
+    <div class="how-to-read-items">
+      <div class="how-to-read-item">
+        <div class="how-to-read-demo command-block" style="margin:0;pointer-events:none;">
+          <span class="command-text">example command</span>
+          <span class="copy-btn" style="pointer-events:none;">Copy</span>
+        </div>
+        <p>Dark boxes like this are <strong>terminal commands</strong>. Click <strong>Copy</strong>, paste into your terminal, and press <strong>Enter</strong>. Each command tells your computer to do something &mdash; download a file, install a tool, start the app. This is how you'll lead your computer through the setup, one step at a time.</p>
+      </div>
+      <div class="how-to-read-item">
+        <div class="explain" style="margin:0;">
+          <strong>Explanation boxes</strong> tell you what a command does in plain English.
+        </div>
+        <p>You don't need to do anything with these &mdash; they're just context so you know what's happening before you run something.</p>
+      </div>
+    </div>
+    <div class="how-to-read-terminal">
+      <strong>What's a terminal?</strong> It's the app where you type commands to talk to your computer. On <strong>Mac</strong>, it's called <strong>Terminal</strong> (search for it in Spotlight with Cmd + Space). On <strong>Windows</strong>, use <strong>Command Prompt</strong> or <strong>PowerShell</strong> (search from the Start menu). It looks like a window with a blinking cursor &mdash; that's where you'll paste the commands from this guide.
+    </div>
+    <div class="how-to-read-safety">
+      <strong>A note on safety:</strong> It's smart to be careful about pasting commands you find online. Every command in this guide is standard, widely-used, and open source &mdash; <code style="background:rgba(46,139,142,0.1);padding:1px 5px;border-radius:3px;font-size:0.85rem;border:1px solid var(--teal-light);">npm install</code> downloads libraries from the public npm registry, and <code style="background:rgba(46,139,142,0.1);padding:1px 5px;border-radius:3px;font-size:0.85rem;border:1px solid var(--teal-light);">npm start</code> runs the app locally on your machine. The app's own code is right here in the project for you to read, and its dependencies (listed in <code style="background:rgba(107,91,149,0.1);padding:1px 5px;border-radius:3px;font-size:0.85rem;border:1px solid var(--violet-light);">package.json</code>) are widely-used open source libraries downloaded from the public npm registry.
+    </div>
+  </div>
 
   <!-- ========== PROGRESS ========== -->
   <div class="progress-section">
