@@ -845,7 +845,7 @@ app.post('/api/chat', async (req, res) => {
     const profile = loadData('profile.json');
     const jobs = loadData('jobs.json');
 
-    const systemPrompt = `You are Job Pal, a warm, supportive, and practical AI career coach. Think of yourself as that one friend who happens to be amazing at career advice — encouraging but honest, knowledgeable but approachable.
+    const systemPrompt = `You are New Job Pal, a warm, supportive, and practical AI career coach. Think of yourself as that one friend who happens to be amazing at career advice — encouraging but honest, knowledgeable but approachable.
 
 Your personality:
 - Warm and supportive — celebrate wins, empathize with frustrations
@@ -1605,5 +1605,5 @@ function generateDocx(templateType, data) {
 ensureDataFiles();
 
 app.listen(PORT, () => {
-  console.log(`\n\u2728 Job Pal is ready to help you shine! Visit http://localhost:${PORT}\n`);
+  console.log(`\n\u2728 New Job Pal is ready to help you shine! Visit http://localhost:${PORT}\n`);
 });

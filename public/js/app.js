@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════════════════════════
-// Job Pal - Main Application JavaScript (ES Module)
+// New Job Pal - Main Application JavaScript (ES Module)
 // Your AI-powered career companion
 // ═══════════════════════════════════════════════════════════════════════════════
 
@@ -229,7 +229,7 @@ const INSPIRATIONAL_QUOTES = [
   { text: 'The details are not the details. They make the design.', author: 'Charles Eames' },
   { text: 'It does not matter how slowly you go as long as you do not stop.', author: 'Confucius' },
   { text: 'Inspiration exists, but it has to find you working.', author: 'Pablo Picasso' },
-  { text: 'Your career is a canvas. Each day, you add a new stroke.', author: 'Job Pal' },
+  { text: 'Your career is a canvas. Each day, you add a new stroke.', author: 'New Job Pal' },
 ];
 
 const SKETCH_NOTES = [
@@ -952,7 +952,7 @@ function renderWritingSamples(samples) {
     container.innerHTML = `
       <div class="empty-state">
         <span class="empty-icon" aria-hidden="true">&#9999;</span>
-        <p>No writing samples yet. Add your first sample above to help Job Pal learn your voice!</p>
+        <p>No writing samples yet. Add your first sample above to help New Job Pal learn your voice!</p>
       </div>`;
     return;
   }

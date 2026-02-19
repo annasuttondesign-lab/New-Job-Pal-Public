@@ -1,7 +1,7 @@
 {
   "name": "job-pal",
   "version": "1.0.0",
-  "description": "Job Pal - Your AI-powered job search companion",
+  "description": "New Job Pal - Your AI-powered job search companion",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
