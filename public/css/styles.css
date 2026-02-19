@@ -493,6 +493,38 @@ legend { font-family: var(--font-heading); font-size: 1.15rem; font-weight: 600;
 .inspiration-decoration { color: var(--text-light); margin-top: 12px; letter-spacing: 6px; font-size: 0.9rem; opacity: 0.4; }
 
 /* ========== PROFILE ========== */
+
+/* Sticky save header */
+.profile-sticky-header {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  background: rgba(246, 242, 236, 0.92);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  padding: 20px 0 16px; margin-bottom: 24px;
+  border-bottom: 1px solid var(--border-light);
+}
+.profile-sticky-header .page-header { margin-bottom: 0; flex: 1; min-width: 0; }
+.profile-sticky-header .btn--save {
+  flex-shrink: 0;
+  background: var(--bg-secondary); color: var(--text-muted);
+  border: 1.5px solid var(--border-sketch);
+  box-shadow: none; transition: all var(--transition-med);
+}
+.profile-sticky-header .btn--save:hover {
+  background: var(--bg-card); color: var(--text-secondary);
+  border-color: var(--ink-light);
+}
+.profile-sticky-header .btn--save.has-changes {
+  background: var(--ochre); color: #fff;
+  border-color: var(--ochre);
+  box-shadow: 0 2px 8px rgba(196, 147, 42, 0.3);
+}
+.profile-sticky-header .btn--save.has-changes:hover {
+  background: #B5850F; border-color: #B5850F;
+  box-shadow: 0 4px 14px rgba(196, 147, 42, 0.4);
+  transform: translateY(-1px);
+}
+
 .profile-form { max-width: 900px; }
 .dynamic-list { display: flex; flex-direction: column; gap: 16px; }
 .dynamic-entry {
@@ -1449,6 +1481,8 @@ legend { font-family: var(--font-heading); font-size: 1.15rem; font-weight: 600;
   .chat-panel { width: 100%; }
   .chat-toggle-label { display: none; }
   .stats-row { grid-template-columns: 1fr 1fr; }
+  .profile-sticky-header { flex-direction: column; align-items: stretch; gap: 12px; padding: 14px 0 12px; }
+  .profile-sticky-header .btn--save { align-self: stretch; text-align: center; justify-content: center; }
 }
 
 /* ========== PRINT ========== */

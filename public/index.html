@@ -222,11 +222,16 @@
          PAGE: PROFILE
          ─────────────────────────────────────────────── -->
     <section id="profile" class="page" aria-labelledby="profile-heading">
-      <header class="page-header">
-        <h2 id="profile-heading" class="page-title">About You</h2>
-        <div class="floral-accent" aria-hidden="true">&mdash; &#8226; &mdash;</div>
-        <p class="page-description">Sketch out your professional story so New Job Pal can find your perfect fit.</p>
-      </header>
+      <div class="profile-sticky-header">
+        <header class="page-header">
+          <h2 id="profile-heading" class="page-title">About You</h2>
+          <p class="page-description">Sketch out your professional story so New Job Pal can find your perfect fit.</p>
+        </header>
+        <button type="button" id="profile-save-sticky" class="btn btn--primary btn--save">
+          <span class="btn-icon" aria-hidden="true">&#10003;</span>
+          Save Profile
+        </button>
+      </div>
 
       <!-- Resume Upload Section -->
       <div class="resume-upload-section">
@@ -475,13 +480,7 @@
           </div>
         </fieldset>
 
-        <!-- Save Button -->
-        <div class="form-actions">
-          <button type="submit" id="profile-save" class="btn btn--primary btn--large btn--save">
-            <span class="btn-icon" aria-hidden="true">&#10003;</span>
-            Save Profile
-          </button>
-        </div>
+        <!-- Save button is in the sticky header above -->
       </form>
     </section>
 
