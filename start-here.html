@@ -866,7 +866,17 @@ body::after {
         <strong>What this does:</strong> Creates a new file called <code style="background:#E8E4F0;padding:1px 5px;border-radius:3px;font-size:0.85rem;">.env</code> by copying the template. The template already has the right format &mdash; you just need to paste in your real API key.
       </div>
 
-      <p>Now open <code style="background:var(--bg-secondary);padding:1px 5px;border-radius:3px;font-size:0.85rem;border:1px solid var(--border-light);">.env</code> in any text editor (VS Code, Notepad, TextEdit &mdash; anything works). You'll see this:</p>
+      <p>Now open the file in a text editor so you can add your key. Run one of these:</p>
+
+      <div class="command-block">
+        <span class="command-text">open .env</span>
+        <button class="copy-btn" data-copy="open .env">Copy</button>
+      </div>
+      <div class="explain" style="margin-top:4px;">
+        <strong>Mac only.</strong> Opens <code style="background:#E8E4F0;padding:1px 5px;border-radius:3px;font-size:0.85rem;">.env</code> in your default text editor. On <strong>Windows</strong>, use <code style="background:#E8E4F0;padding:1px 5px;border-radius:3px;font-size:0.85rem;">notepad .env</code> instead.
+      </div>
+
+      <p>You'll see this:</p>
 
       <div class="file-block">
         <div class="file-block-header">
@@ -956,9 +966,59 @@ PORT=3000</pre>
     </div>
   </div>
 
+  <!-- ========== GOOD TO KNOW ========== -->
+  <div class="step" style="border-color: var(--teal-light);">
+    <div class="step-header">
+      <div class="step-number" style="border-color: var(--teal); color: var(--teal); font-size: 1.1rem;"><span>&#9432;</span></div>
+      <div class="step-title-group">
+        <div class="step-title">Good to Know</div>
+        <div class="step-subtitle">Your data, and coming back tomorrow</div>
+      </div>
+    </div>
+    <div class="step-body">
+
+      <h4 style="font-family: var(--font-heading); font-size: 1.05rem; margin-bottom: 8px; color: var(--text-primary);">Where does my data live?</h4>
+      <p>
+        Everything you save in New Job Pal &mdash; your profile, jobs, resumes, cover letters, contacts &mdash; is stored in simple files inside a <code style="background:var(--bg-secondary);padding:1px 5px;border-radius:3px;font-size:0.85rem;border:1px solid var(--border-light);">data/</code> folder on <strong>your computer</strong>. Nothing is sent to the cloud or stored on someone else's server. The only external connection is to the Anthropic API when you use an AI feature (like generating a resume), and even then, Anthropic doesn't store your prompts.
+      </p>
+      <p>
+        The <code style="background:var(--bg-secondary);padding:1px 5px;border-radius:3px;font-size:0.85rem;border:1px solid var(--border-light);">data/</code> folder is created automatically the first time you run the app. You'll never need to touch these files directly &mdash; the app manages them for you.
+      </p>
+
+      <h4 style="font-family: var(--font-heading); font-size: 1.05rem; margin-top: 24px; margin-bottom: 8px; color: var(--text-primary);">How do I get back to New Job Pal each day?</h4>
+      <p>
+        New Job Pal runs on your computer, so you'll need to start it each time. It only takes a few seconds:
+      </p>
+
+      <p><strong>1.</strong> Open your terminal</p>
+      <p><strong>2.</strong> Navigate to the project folder:</p>
+
+      <div class="command-block">
+        <span class="command-text">cd new-job-pal</span>
+        <button class="copy-btn" data-copy="cd new-job-pal">Copy</button>
+      </div>
+
+      <p><strong>3.</strong> Start the server:</p>
+
+      <div class="command-block">
+        <span class="command-text">npm start</span>
+        <button class="copy-btn" data-copy="npm start">Copy</button>
+      </div>
+
+      <p><strong>4.</strong> Open <a href="http://localhost:3000" target="_blank" rel="noopener">http://localhost:3000</a> in your browser</p>
+
+      <p style="margin-top: 12px;">
+        All your data will be right where you left it. When you're done for the day, press <strong>Ctrl + C</strong> in the terminal to stop the server.
+      </p>
+
+      <div class="explain--teal explain">
+        <strong>Tip:</strong> You can leave the server running in the background while you work. It uses very little resources. Just keep that terminal window open and switch to your browser whenever you need Job Pal.
+      </div>
+    </div>
+  </div>
+
   <!-- ========== CELEBRATION ========== -->
   <div class="celebration celebration-hidden" id="celebration">
-    <div class="celebration-icon">&#127800;</div>
     <h2>You did it!</h2>
     <p>
       New Job Pal is ready to help you land your next role.
