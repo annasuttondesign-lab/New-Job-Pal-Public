@@ -743,8 +743,19 @@ body::after {
     </div>
     <div class="step-body">
       <p>
-        If you downloaded this as a ZIP file, unzip it and open a terminal in that folder.
-        If you're using Git, clone the repository:
+        On the GitHub page, click the green <strong>Code</strong> button and choose <strong>Download ZIP</strong>. Once the download finishes, unzip the file. Move the unzipped folder somewhere convenient on your computer &mdash; for example, a <strong>Projects</strong> folder in your home directory.
+      </p>
+
+      <p>
+        Next, open a terminal directly inside the project folder. On <strong>Mac</strong>, right-click (or Control-click) the folder in Finder and choose <strong>"New Terminal at Folder"</strong>. On <strong>Windows</strong>, open the folder in File Explorer, click the address bar, type <code style="background:#E8E4F0;padding:1px 5px;border-radius:3px;font-size:0.85rem;">cmd</code>, and press Enter.
+      </p>
+
+      <div class="explain">
+        <strong>Why this matters:</strong> Your terminal needs to be <em>inside</em> the project folder so the next commands know where to look. If you open a terminal the regular way, it usually starts in your home directory instead.
+      </div>
+
+      <p>
+        <strong>Alternatively</strong>, if you're comfortable with Git, you can clone the repository instead of downloading the ZIP:
       </p>
 
       <div class="command-block">
@@ -757,10 +768,6 @@ body::after {
       <div class="command-block">
         <span class="command-text">cd new-job-pal</span>
         <button class="copy-btn" data-copy="cd new-job-pal">Copy</button>
-      </div>
-
-      <div class="explain">
-        <strong>What <code style="background:#E8E4F0;padding:1px 5px;border-radius:3px;font-size:0.85rem;">cd</code> does:</strong> "Change directory" &mdash; it moves your terminal into the project folder so the next commands know where to look.
       </div>
 
       <p>Now install the dependencies (libraries the app needs):</p>
