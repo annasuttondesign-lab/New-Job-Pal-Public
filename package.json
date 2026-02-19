@@ -1,0 +1,24 @@
+{
+  "name": "job-pal",
+  "version": "1.0.0",
+  "description": "Job Pal - Your AI-powered job search companion",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "gen:api-routes": "node scripts/gen-api-routes.js",
+    "gen:models": "node scripts/gen-models.js",
+    "gen:env": "node scripts/gen-env.js",
+    "gen:all": "node scripts/gen-api-routes.js && node scripts/gen-models.js && node scripts/gen-env.js",
+    "setup-hooks": "cp .husky/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit && echo 'Git hooks installed!'"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "docxtemplater": "^3.68.2",
+    "express": "^4.21.0",
+    "multer": "^1.4.5-lts.1",
+    "pdf-parse": "^2.4.5",
+    "pizzip": "^3.2.0",
+    "uuid": "^11.0.0"
+  }
+}

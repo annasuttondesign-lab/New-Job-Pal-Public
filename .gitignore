@@ -1,0 +1,13 @@
+node_modules/
+.env
+data/
+
+# OS files
+.DS_Store
+
+# Editor files
+*.swp
+*.swo
+
+# Keep generated docs (they should be committed)
+# !docs/_generated/

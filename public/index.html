@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Job Pal - Your AI-powered career companion for job searching, resume tailoring, and interview prep.">
+  <meta name="theme-color" content="#2D3142">
+  <title>Job Pal &mdash; Your Career Companion</title>
+
+  <!-- Favicon: pen nib -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9998;</text></svg>" type="image/svg+xml">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════
+       SIDEBAR NAVIGATION
+       ═══════════════════════════════════════════════════ -->
+  <nav id="sidebar" class="sidebar" aria-label="Main navigation">
+    <div class="sidebar-top">
+      <!-- Logo / Brand -->
+      <header class="sidebar-brand">
+        <h1 class="sidebar-logo">
+          <span class="logo-flower" aria-hidden="true">&#9998;</span>
+          Job Pal
+        </h1>
+        <p class="sidebar-tagline">your career studio</p>
+      </header>
+
+      <!-- Navigation Items -->
+      <ul class="sidebar-nav" role="list">
+        <li>
+          <a href="#dashboard" class="nav-item active" data-page="dashboard" aria-current="page">
+            <span class="nav-icon" aria-hidden="true">&#9633;</span>
+            <span class="nav-label">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="#jobs" class="nav-item" data-page="jobs">
+            <span class="nav-icon" aria-hidden="true">&#9744;</span>
+            <span class="nav-label">Job Board</span>
+          </a>
+        </li>
+        <li>
+          <a href="#headhunter" class="nav-item" data-page="headhunter">
+            <span class="nav-icon" aria-hidden="true">&#9737;</span>
+            <span class="nav-label">Headhunter</span>
+          </a>
+        </li>
+        <li>
+          <a href="#contacts" class="nav-item" data-page="contacts">
+            <span class="nav-icon" aria-hidden="true">&#9742;</span>
+            <span class="nav-label">Contacts</span>
+          </a>
+        </li>
+        <li>
+          <a href="#profile" class="nav-item" data-page="profile">
+            <span class="nav-icon" aria-hidden="true">&#9998;</span>
+            <span class="nav-label">My Profile</span>
+          </a>
+        </li>
+        <li>
+          <a href="#writing-samples" class="nav-item" data-page="writing-samples">
+            <span class="nav-icon" aria-hidden="true">&#9999;</span>
+            <span class="nav-label">Writing Voice</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Sidebar Bottom -->
+    <div class="sidebar-bottom">
+      <button id="settings-btn" class="nav-item nav-item--settings" aria-label="Open settings">
+        <span class="nav-icon" aria-hidden="true">&#9881;</span>
+        <span class="nav-label">Settings</span>
+      </button>
+      <div class="sidebar-quote" id="sidebar-quote">
+        <p class="quote-text">"Every artist was first an amateur."</p>
+        <p class="quote-author">- Ralph Waldo Emerson</p>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ═══════════════════════════════════════════════════
+       MAIN CONTENT AREA
+       ═══════════════════════════════════════════════════ -->
+  <main id="main-content" class="main-content">
+
+    <!-- ───────────────────────────────────────────────
+         PAGE: DASHBOARD
+         ─────────────────────────────────────────────── -->
+    <section id="dashboard" class="page active" aria-labelledby="dashboard-heading">
+      <header class="page-header">
+        <h2 id="dashboard-heading" class="page-title">Dashboard</h2>
+        <div class="floral-accent" aria-hidden="true">&mdash; &bull; &mdash;</div>
+      </header>
+
+      <!-- Welcome Message -->
+      <div class="welcome-banner" id="welcome-message">
+        <div class="welcome-text">
+          <h3 class="welcome-greeting">Good morning, let's sketch out your next chapter</h3>
+          <p class="welcome-sub">Every great career is a work in progress.</p>
+        </div>
+        <div class="welcome-decoration" aria-hidden="true">&#9998;</div>
+      </div>
+
+      <!-- Sketch Divider -->
+      <svg class="sketch-divider" viewBox="0 0 600 20" aria-hidden="true"><path d="M0,10 C50,2 100,18 150,10 C200,2 250,18 300,10 C350,2 400,18 450,10 C500,2 550,18 600,10" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.2"/></svg>
+
+      <!-- Stats Cards -->
+      <div class="stats-row">
+        <article class="stat-card" id="stat-jobs">
+          <div class="stat-icon" aria-hidden="true">&#9744;</div>
+          <div class="stat-info">
+            <span class="stat-number" data-count="0">0</span>
+            <span class="stat-label">Jobs Saved</span>
+          </div>
+        </article>
+        <article class="stat-card" id="stat-applied">
+          <div class="stat-icon" aria-hidden="true">&#10003;</div>
+          <div class="stat-info">
+            <span class="stat-number" data-count="0">0</span>
+            <span class="stat-label">Applications Sent</span>
+          </div>
+        </article>
+        <article class="stat-card" id="stat-match">
+          <div class="stat-icon" aria-hidden="true">&#9678;</div>
+          <div class="stat-info">
+            <span class="stat-number" data-count="0">0%</span>
+            <span class="stat-label">Avg Match Score</span>
+          </div>
+        </article>
+        <article class="stat-card" id="stat-interviews">
+          <div class="stat-icon" aria-hidden="true">&#9733;</div>
+          <div class="stat-info">
+            <span class="stat-number" data-count="0">0</span>
+            <span class="stat-label">Interviews</span>
+          </div>
+        </article>
+      </div>
+
+      <!-- Recent Activity -->
+      <section class="dashboard-section" aria-labelledby="recent-activity-heading">
+        <h3 id="recent-activity-heading" class="section-title">Recent Activity</h3>
+        <div id="recent-activity" class="activity-feed">
+          <div class="empty-state">
+            <span class="empty-icon" aria-hidden="true">&#9998;</span>
+            <p>No recent activity yet. Start by adding a job or updating your profile!</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sketch Divider -->
+      <svg class="sketch-divider" viewBox="0 0 600 20" aria-hidden="true"><path d="M0,10 Q75,0 150,10 T300,10 T450,10 T600,10" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.15"/></svg>
+
+      <!-- Quick Actions -->
+      <section class="dashboard-section" aria-labelledby="quick-actions-heading">
+        <h3 id="quick-actions-heading" class="section-title">Quick Actions</h3>
+        <div class="quick-actions">
+          <button class="btn btn--primary btn--action" data-action="add-job" id="quick-add-job">
+            <span class="btn-icon" aria-hidden="true">+</span>
+            Add a Job
+          </button>
+          <button class="btn btn--secondary btn--action" data-action="search-jobs" id="quick-search-jobs">
+            <span class="btn-icon" aria-hidden="true">&#9737;</span>
+            Search Jobs
+          </button>
+          <button class="btn btn--tertiary btn--action" data-action="update-profile" id="quick-update-profile">
+            <span class="btn-icon" aria-hidden="true">&#9998;</span>
+            Update Profile
+          </button>
+        </div>
+      </section>
+
+      <!-- Sketch Note -->
+      <section class="dashboard-section sketch-note-section" aria-labelledby="sketch-note-heading">
+        <div class="sketch-note-card" id="sketch-note-card">
+          <svg class="sketch-note-doodle sketch-note-doodle--left" viewBox="0 0 60 60" aria-hidden="true">
+            <circle cx="30" cy="30" r="20" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.15" stroke-dasharray="4,3"/>
+            <circle cx="30" cy="30" r="8" fill="none" stroke="currentColor" stroke-width="1" opacity="0.1"/>
+          </svg>
+          <p class="sketch-note-text" id="sketch-note-text">You're doing great. Every application is a step forward.</p>
+          <svg class="sketch-note-doodle sketch-note-doodle--right" viewBox="0 0 60 60" aria-hidden="true">
+            <path d="M10,50 Q30,10 50,50" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.15"/>
+            <path d="M20,45 Q30,20 40,45" fill="none" stroke="currentColor" stroke-width="1" opacity="0.1"/>
+          </svg>
+        </div>
+      </section>
+
+      <!-- Paint Palette Decoration -->
+      <div class="paint-palette-decoration" aria-hidden="true">
+        <span class="paint-dot" style="background: var(--teal); width: 8px; height: 8px;"></span>
+        <span class="paint-dot" style="background: var(--violet); width: 6px; height: 6px;"></span>
+        <span class="paint-dot" style="background: var(--ochre); width: 10px; height: 10px;"></span>
+        <span class="paint-dot" style="background: var(--sienna); width: 7px; height: 7px;"></span>
+        <span class="paint-dot" style="background: var(--indigo); width: 5px; height: 5px;"></span>
+      </div>
+
+      <!-- Daily Inspiration -->
+      <section class="dashboard-section inspiration-section" aria-labelledby="inspiration-heading">
+        <h3 id="inspiration-heading" class="section-title">Daily Inspiration</h3>
+        <div id="daily-inspiration" class="inspiration-card">
+          <blockquote class="inspiration-quote">
+            <p>"You are never too old to set another goal or to dream a new dream."</p>
+            <cite>- C.S. Lewis</cite>
+          </blockquote>
+          <div class="inspiration-decoration" aria-hidden="true">&mdash; &#8226; &mdash;</div>
+        </div>
+      </section>
+    </section>
+
+
+    <!-- ───────────────────────────────────────────────
+         PAGE: PROFILE
+         ─────────────────────────────────────────────── -->
+    <section id="profile" class="page" aria-labelledby="profile-heading">
+      <header class="page-header">
+        <h2 id="profile-heading" class="page-title">About You</h2>
+        <div class="floral-accent" aria-hidden="true">&mdash; &#8226; &mdash;</div>
+        <p class="page-description">Sketch out your professional story so Job Pal can find your perfect fit.</p>
+      </header>
+
+      <!-- Resume Upload Section -->
+      <div class="resume-upload-section">
+        <div class="resume-upload-card">
+          <div class="resume-upload-icon" aria-hidden="true">&#9998;</div>
+          <h3 class="resume-upload-title">Quick Start: Upload Your Resume</h3>
+          <p class="resume-upload-description">Upload a resume and let AI fill in your profile automatically. You can edit everything after.</p>
+          <form id="resume-upload-form" class="resume-upload-form">
+            <div class="resume-upload-row">
+              <input type="file" id="resume-file-input" name="resume" class="form-input form-input--file" accept=".txt,.doc,.docx,.pdf">
+              <button type="submit" id="resume-parse-btn" class="btn btn--primary">
+                <span class="btn-icon" aria-hidden="true">&#9998;</span>
+                Parse Resume
+              </button>
+            </div>
+            <p class="form-hint">Accepted formats: .txt, .doc, .docx, .pdf (plain text works best)</p>
+          </form>
+        </div>
+      </div>
+
+      <!-- Document Templates Section -->
+      <div class="templates-section">
+        <h3 class="section-title">Document Templates</h3>
+        <p class="page-description" style="margin-bottom: 16px;">Upload Word (.docx) templates so Job Pal can format your tailored resumes and cover letters.</p>
+        <div class="templates-grid">
+          <!-- Resume Template Slot -->
+          <div class="template-slot" id="template-slot-resume">
+            <div class="template-slot-header">
+              <span class="template-slot-icon" aria-hidden="true">&#9998;</span>
+              <h4 class="template-slot-title">Resume Template</h4>
+            </div>
+            <div class="template-slot-status" id="template-status-resume">
+              <p class="template-empty-text">No template uploaded</p>
+            </div>
+            <form class="template-upload-form" data-type="resume">
+              <div class="template-upload-row">
+                <input type="file" class="form-input form-input--file template-file-input" accept=".docx" data-type="resume">
+                <button type="submit" class="btn btn--secondary btn--small">Upload</button>
+              </div>
+            </form>
+            <details class="template-help">
+              <summary>Placeholder guide</summary>
+              <p class="form-hint">Use these in your .docx: <code>{name}</code>, <code>{email}</code>, <code>{phone}</code>, <code>{location}</code>, <code>{title}</code>, <code>{company}</code>, <code>{job_title}</code>, <code>{date}</code>, <code>{resume_content}</code></p>
+            </details>
+          </div>
+          <!-- Cover Letter Template Slot -->
+          <div class="template-slot" id="template-slot-cover-letter">
+            <div class="template-slot-header">
+              <span class="template-slot-icon" aria-hidden="true">&#9999;</span>
+              <h4 class="template-slot-title">Cover Letter Template</h4>
+            </div>
+            <div class="template-slot-status" id="template-status-cover-letter">
+              <p class="template-empty-text">No template uploaded</p>
+            </div>
+            <form class="template-upload-form" data-type="cover-letter">
+              <div class="template-upload-row">
+                <input type="file" class="form-input form-input--file template-file-input" accept=".docx" data-type="cover-letter">
+                <button type="submit" class="btn btn--secondary btn--small">Upload</button>
+              </div>
+            </form>
+            <details class="template-help">
+              <summary>Placeholder guide</summary>
+              <p class="form-hint">Use these in your .docx: <code>{name}</code>, <code>{email}</code>, <code>{phone}</code>, <code>{location}</code>, <code>{title}</code>, <code>{company}</code>, <code>{job_title}</code>, <code>{date}</code>, <code>{cover_letter_content}</code></p>
+            </details>
+          </div>
+        </div>
+      </div>
+
+      <form id="profile-form" class="profile-form" novalidate>
+
+        <!-- Basic Information -->
+        <fieldset class="form-section">
+          <legend class="form-section-title">Basic Information</legend>
+          <div class="form-grid form-grid--2col">
+            <div class="form-group">
+              <label for="profile-name" class="form-label">Full Name</label>
+              <input type="text" id="profile-name" name="name" class="form-input" placeholder="Your full name" autocomplete="name">
+            </div>
+            <div class="form-group">
+              <label for="profile-email" class="form-label">Email</label>
+              <input type="email" id="profile-email" name="email" class="form-input" placeholder="you@example.com" autocomplete="email">
+            </div>
+            <div class="form-group">
+              <label for="profile-phone" class="form-label">Phone</label>
+              <input type="tel" id="profile-phone" name="phone" class="form-input" placeholder="(555) 123-4567" autocomplete="tel">
+            </div>
+            <div class="form-group">
+              <label for="profile-location" class="form-label">Location</label>
+              <input type="text" id="profile-location" name="location" class="form-input" placeholder="City, State" autocomplete="address-level2">
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Professional Identity -->
+        <fieldset class="form-section">
+          <legend class="form-section-title">Professional Identity</legend>
+          <div class="form-group">
+            <label for="profile-title" class="form-label">Professional Title</label>
+            <input type="text" id="profile-title" name="title" class="form-input" placeholder="e.g. Senior Product Designer">
+          </div>
+          <div class="form-group">
+            <label for="profile-summary" class="form-label">Professional Summary</label>
+            <textarea id="profile-summary" name="summary" class="form-textarea" rows="5" placeholder="A brief summary of your experience, strengths, and career goals..."></textarea>
+          </div>
+        </fieldset>
+
+        <!-- Skills -->
+        <fieldset class="form-section">
+          <legend class="form-section-title">Skills</legend>
+          <div class="tag-input-group">
+            <div class="tag-input-row">
+              <input type="text" id="profile-skill-input" class="form-input form-input--tag" placeholder="Type a skill and press Add">
+              <button type="button" id="profile-add-skill" class="btn btn--small btn--primary">Add</button>
+            </div>
+            <div id="profile-skills-tags" class="tags-container" role="list" aria-label="Added skills">
+              <!-- Skills tags appear here dynamically -->
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Work Experience -->
+        <fieldset class="form-section">
+          <legend class="form-section-title">Work Experience</legend>
+          <div id="profile-experience-list" class="dynamic-list">
+            <!-- Experience entries are added dynamically -->
+          </div>
+          <button type="button" id="profile-add-experience" class="btn btn--outline btn--add-entry">
+            <span aria-hidden="true">+</span> Add Experience
+          </button>
+        </fieldset>
+
+        <!-- Experience Entry Template (hidden, cloned by JS) -->
+        <template id="experience-template">
+          <article class="dynamic-entry experience-entry" data-entry-type="experience">
+            <div class="entry-header">
+              <h4 class="entry-title">Work Experience</h4>
+              <button type="button" class="btn btn--danger btn--small btn--remove-entry" aria-label="Remove this experience entry">Remove</button>
+            </div>
+            <div class="form-grid form-grid--2col">
+              <div class="form-group">
+                <label class="form-label">Company</label>
+                <input type="text" name="experience-company" class="form-input" placeholder="Company name">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Job Title</label>
+                <input type="text" name="experience-title" class="form-input" placeholder="Your title">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Start Date</label>
+                <input type="month" name="experience-start" class="form-input">
+              </div>
+              <div class="form-group">
+                <label class="form-label">End Date</label>
+                <input type="month" name="experience-end" class="form-input">
+                <label class="form-checkbox-label">
+                  <input type="checkbox" name="experience-current" class="form-checkbox"> I currently work here
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Description</label>
+              <textarea name="experience-description" class="form-textarea" rows="4" placeholder="Describe your responsibilities, achievements, and impact..."></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Field Tags</label>
+              <div class="tag-input-row">
+                <input type="text" name="experience-field-input" class="form-input form-input--tag" placeholder="e.g. tech, marketing, design">
+                <button type="button" class="btn btn--small btn--secondary btn--add-field-tag">Add</button>
+              </div>
+              <div class="tags-container experience-field-tags" role="list" aria-label="Field tags">
+                <!-- Field tags appear here -->
+              </div>
+            </div>
+          </article>
+        </template>
+
+        <!-- Education -->
+        <fieldset class="form-section">
+          <legend class="form-section-title">Education</legend>
+          <div id="profile-education-list" class="dynamic-list">
+            <!-- Education entries are added dynamically -->
+          </div>
+          <button type="button" id="profile-add-education" class="btn btn--outline btn--add-entry">
+            <span aria-hidden="true">+</span> Add Education
+          </button>
+        </fieldset>
+
+        <!-- Education Entry Template (hidden, cloned by JS) -->
+        <template id="education-template">
+          <article class="dynamic-entry education-entry" data-entry-type="education">
+            <div class="entry-header">
+              <h4 class="entry-title">Education</h4>
+              <button type="button" class="btn btn--danger btn--small btn--remove-entry" aria-label="Remove this education entry">Remove</button>
+            </div>
+            <div class="form-grid form-grid--2col">
+              <div class="form-group">
+                <label class="form-label">Institution</label>
+                <input type="text" name="education-institution" class="form-input" placeholder="University or school name">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Degree</label>
+                <input type="text" name="education-degree" class="form-input" placeholder="e.g. Bachelor of Science">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Field of Study</label>
+                <input type="text" name="education-field" class="form-input" placeholder="e.g. Computer Science">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Year</label>
+                <input type="number" name="education-year" class="form-input" placeholder="2024" min="1950" max="2040">
+              </div>
+            </div>
+          </article>
+        </template>
+
+        <!-- Certifications -->
+        <fieldset class="form-section">
+          <legend class="form-section-title">Certifications</legend>
+          <div class="tag-input-group">
+            <div class="tag-input-row">
+              <input type="text" id="profile-cert-input" class="form-input form-input--tag" placeholder="Type a certification and press Add">
+              <button type="button" id="profile-add-cert" class="btn btn--small btn--primary">Add</button>
+            </div>
+            <div id="profile-certs-tags" class="tags-container" role="list" aria-label="Added certifications">
+              <!-- Certification tags appear here dynamically -->
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Links -->
+        <fieldset class="form-section">
+          <legend class="form-section-title">Links</legend>
+          <div class="form-grid form-grid--2col">
+            <div class="form-group">
+              <label for="profile-linkedin" class="form-label">LinkedIn</label>
+              <input type="url" id="profile-linkedin" name="linkedin" class="form-input" placeholder="https://linkedin.com/in/yourname" autocomplete="url">
+            </div>
+            <div class="form-group">
+              <label for="profile-portfolio" class="form-label">Portfolio</label>
+              <input type="url" id="profile-portfolio" name="portfolio" class="form-input" placeholder="https://yourportfolio.com">
+            </div>
+            <div class="form-group">
+              <label for="profile-github" class="form-label">GitHub</label>
+              <input type="url" id="profile-github" name="github" class="form-input" placeholder="https://github.com/yourusername">
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Save Button -->
+        <div class="form-actions">
+          <button type="submit" id="profile-save" class="btn btn--primary btn--large btn--save">
+            <span class="btn-icon" aria-hidden="true">&#10003;</span>
+            Save Profile
+          </button>
+        </div>
+      </form>
+    </section>
+
+
+    <!-- ───────────────────────────────────────────────
+         PAGE: WRITING SAMPLES
+         ─────────────────────────────────────────────── -->
+    <section id="writing-samples" class="page" aria-labelledby="writing-heading">
+      <header class="page-header">
+        <h2 id="writing-heading" class="page-title">Your Writing Voice</h2>
+        <div class="floral-accent" aria-hidden="true">&mdash; &#8226; &mdash;</div>
+        <p class="page-description">Share your writing so Job Pal can learn your voice. The more you share, the more authentically we can draft on your behalf.</p>
+      </header>
+
+      <!-- Add Sample Form -->
+      <div class="writing-upload-area">
+        <h3 class="section-title">Add a Writing Sample</h3>
+        <form id="writing-sample-form" class="writing-form">
+          <div class="form-grid form-grid--2col">
+            <div class="form-group">
+              <label for="sample-title" class="form-label">Title</label>
+              <input type="text" id="sample-title" name="title" class="form-input" placeholder="e.g. Q4 Marketing Report" required>
+            </div>
+            <div class="form-group">
+              <label for="sample-type" class="form-label">Type</label>
+              <select id="sample-type" name="type" class="form-select" required>
+                <option value="" disabled selected>Select a type...</option>
+                <option value="email">Email</option>
+                <option value="blog-post">Blog Post</option>
+                <option value="report">Report</option>
+                <option value="cover-letter">Cover Letter</option>
+                <option value="social-media">Social Media</option>
+                <option value="academic">Academic</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="sample-content" class="form-label">Content</label>
+            <textarea id="sample-content" name="content" class="form-textarea form-textarea--large" rows="10" placeholder="Paste your writing sample here..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="sample-file" class="form-label">Or upload a file</label>
+            <input type="file" id="sample-file" name="file" class="form-input form-input--file" accept=".txt,.doc,.docx,.pdf">
+            <p class="form-hint">Accepted formats: .txt, .doc, .docx, .pdf</p>
+          </div>
+          <div class="form-actions form-actions--left">
+            <button type="submit" id="sample-add-btn" class="btn btn--primary">
+              <span class="btn-icon" aria-hidden="true">+</span>
+              Add Sample
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Samples List -->
+      <div class="samples-section">
+        <h3 class="section-title">Your Samples</h3>
+        <div id="samples-list" class="samples-grid">
+          <div class="empty-state">
+            <span class="empty-icon" aria-hidden="true">&#9999;</span>
+            <p>No writing samples yet. Add your first sample above to help Job Pal learn your voice!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ───────────────────────────────────────────────
+         PAGE: JOB BOARD
+         ─────────────────────────────────────────────── -->
+    <section id="jobs" class="page" aria-labelledby="jobs-heading">
+      <header class="page-header">
+        <h2 id="jobs-heading" class="page-title">Your Opportunities</h2>
+        <div class="floral-accent" aria-hidden="true">&mdash; &#8226; &mdash;</div>
+        <p class="page-description">Track and manage the jobs that catch your eye.</p>
+      </header>
+
+      <!-- Add Job Toggle -->
+      <div class="add-job-section">
+        <button type="button" id="toggle-add-job" class="btn btn--primary btn--action">
+          <span class="btn-icon" aria-hidden="true">+</span>
+          Add New Job
+        </button>
+
+        <!-- Add Job Panel (collapsible) -->
+        <div id="add-job-panel" class="add-job-panel" hidden>
+          <div class="add-job-tabs" role="tablist" aria-label="Job input method">
+            <button role="tab" class="tab-btn active" id="tab-quick" aria-controls="panel-quick" aria-selected="true" data-tab="quick">
+              Quick Add
+            </button>
+            <button role="tab" class="tab-btn" id="tab-manual" aria-controls="panel-manual" aria-selected="false" data-tab="manual">
+              Manual Add
+            </button>
+          </div>
+
+          <!-- Quick Add Tab Panel (URL extraction) -->
+          <div role="tabpanel" id="panel-quick" class="tab-panel active" aria-labelledby="tab-quick">
+            <form id="job-url-form" class="job-form">
+              <div class="form-group">
+                <label for="job-url-input" class="form-label">Job Posting URL</label>
+                <input type="url" id="job-url-input" name="url" class="form-input form-input--large" placeholder="https://www.linkedin.com/jobs/view/..." required>
+                <p class="form-hint">Paste a link to any job posting and Job Pal will extract the details automatically.</p>
+              </div>
+              <div class="form-actions form-actions--left">
+                <button type="submit" id="job-extract-btn" class="btn btn--primary">
+                  <span class="btn-icon" aria-hidden="true">&#9737;</span>
+                  Extract Job Info
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Manual Add Tab Panel -->
+          <div role="tabpanel" id="panel-manual" class="tab-panel" aria-labelledby="tab-manual" hidden>
+            <form id="job-manual-form" class="job-form">
+              <div class="form-grid form-grid--2col">
+                <div class="form-group">
+                  <label for="job-manual-title" class="form-label">Job Title</label>
+                  <input type="text" id="job-manual-title" name="title" class="form-input" placeholder="e.g. Product Designer" required>
+                </div>
+                <div class="form-group">
+                  <label for="job-manual-company" class="form-label">Company</label>
+                  <input type="text" id="job-manual-company" name="company" class="form-input" placeholder="Company name" required>
+                </div>
+                <div class="form-group">
+                  <label for="job-manual-location" class="form-label">Location</label>
+                  <input type="text" id="job-manual-location" name="location" class="form-input" placeholder="City, State or Remote">
+                </div>
+                <div class="form-group">
+                  <label for="job-manual-type" class="form-label">Type</label>
+                  <select id="job-manual-type" name="type" class="form-select">
+                    <option value="full-time">Full-time</option>
+                    <option value="part-time">Part-time</option>
+                    <option value="contract">Contract</option>
+                    <option value="freelance">Freelance</option>
+                    <option value="internship">Internship</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-grid form-grid--2col" style="margin-bottom:0">
+                <div class="form-group">
+                  <label for="job-manual-salary-min" class="form-label">Pay Range Min ($)</label>
+                  <input type="number" id="job-manual-salary-min" name="salaryMin" class="form-input" placeholder="e.g. 50">
+                </div>
+                <div class="form-group">
+                  <label for="job-manual-salary-max" class="form-label">Pay Range Max ($)</label>
+                  <input type="number" id="job-manual-salary-max" name="salaryMax" class="form-input" placeholder="e.g. 75">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="job-manual-salary-type" class="form-label">Pay Type</label>
+                <select id="job-manual-salary-type" name="salaryType" class="form-select">
+                  <option value="">-- Select --</option>
+                  <option value="hourly">Per Hour</option>
+                  <option value="annual">Per Year</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="job-manual-url" class="form-label">Job URL</label>
+                <input type="url" id="job-manual-url" name="url" class="form-input" placeholder="https://...">
+              </div>
+              <div class="form-group">
+                <label for="job-manual-description" class="form-label">Description</label>
+                <textarea id="job-manual-description" name="description" class="form-textarea" rows="6" placeholder="Job description, requirements, etc."></textarea>
+              </div>
+              <div class="form-actions form-actions--left">
+                <button type="submit" id="job-manual-save-btn" class="btn btn--primary">
+                  <span class="btn-icon" aria-hidden="true">&#10003;</span>
+                  Save Job
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter & Sort Bar -->
+      <div class="filter-bar">
+        <div class="filter-group">
+          <label for="jobs-filter-status" class="filter-label">Status:</label>
+          <select id="jobs-filter-status" class="form-select form-select--small" data-filter="status">
+            <option value="all">All</option>
+            <option value="saved">Saved</option>
+            <option value="applied">Applied</option>
+            <option value="interviewing">Interviewing</option>
+            <option value="offer">Offer</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="jobs-sort" class="filter-label">Sort:</label>
+          <select id="jobs-sort" class="form-select form-select--small" data-sort="jobs">
+            <option value="newest">Newest</option>
+            <option value="match">Match Score</option>
+            <option value="company">Company</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Jobs List -->
+      <div id="jobs-list" class="jobs-grid">
+        <div class="empty-state">
+          <span class="empty-icon" aria-hidden="true">&#9744;</span>
+          <p>No jobs saved yet. Add your first opportunity using the button above!</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ───────────────────────────────────────────────
+         PAGE: JOB DETAIL VIEW
+         ─────────────────────────────────────────────── -->
+    <section id="job-detail" class="page" aria-labelledby="job-detail-heading">
+      <!-- Back Button -->
+      <button type="button" id="job-detail-back" class="btn btn--ghost btn--back" data-action="back-to-jobs">
+        <span aria-hidden="true">&larr;</span> Back to Job Board
+      </button>
+
+      <!-- Job Header -->
+      <header class="job-detail-header">
+        <div class="job-detail-info">
+          <div class="job-detail-title-row">
+            <h2 id="job-detail-heading" class="page-title" data-bind="job-title">Job Title</h2>
+            <button type="button" id="job-detail-star-btn" class="star-btn" aria-label="Toggle favorite" title="Favorite this job">
+              <span class="star-icon">&#9734;</span>
+            </button>
+          </div>
+          <p class="job-detail-company" data-bind="job-company">Company Name</p>
+          <p class="job-detail-location" data-bind="job-location">Location</p>
+          <p class="job-detail-salary" id="job-detail-salary" data-bind="job-salary"></p>
+        </div>
+        <div class="job-detail-actions">
+          <div class="form-group">
+            <label for="job-detail-status" class="form-label">Status</label>
+            <select id="job-detail-status" class="form-select form-select--status" data-bind="job-status">
+              <option value="saved">Saved</option>
+              <option value="applied">Applied</option>
+              <option value="interviewing">Interviewing</option>
+              <option value="offer">Offer</option>
+              <option value="rejected">Rejected</option>
+              <option value="withdrawn">Withdrawn</option>
+            </select>
+          </div>
+        </div>
+      </header>
+
+      <!-- Job Detail Tabs -->
+      <div class="job-detail-tabs" role="tablist" aria-label="Job detail sections">
+        <button role="tab" class="tab-btn active" id="jd-tab-description" aria-controls="jd-panel-description" aria-selected="true" data-tab="description">
+          Description
+        </button>
+        <button role="tab" class="tab-btn" id="jd-tab-match" aria-controls="jd-panel-match" aria-selected="false" data-tab="match">
+          Match Analysis
+        </button>
+        <button role="tab" class="tab-btn" id="jd-tab-resume" aria-controls="jd-panel-resume" aria-selected="false" data-tab="resume">
+          Tailored Resume
+        </button>
+        <button role="tab" class="tab-btn" id="jd-tab-cover" aria-controls="jd-panel-cover" aria-selected="false" data-tab="cover">
+          Cover Letter
+        </button>
+        <button role="tab" class="tab-btn" id="jd-tab-documents" aria-controls="jd-panel-documents" aria-selected="false" data-tab="documents">
+          Documents
+        </button>
+        <button role="tab" class="tab-btn" id="jd-tab-interview" aria-controls="jd-panel-interview" aria-selected="false" data-tab="interview">
+          Mock Interview
+        </button>
+      </div>
+
+      <!-- Description Panel -->
+      <div role="tabpanel" id="jd-panel-description" class="tab-panel active" aria-labelledby="jd-tab-description">
+        <div class="job-description-content">
+          <div id="job-detail-description" data-bind="job-description">
+            <p class="text-muted">Job description will appear here.</p>
+          </div>
+          <div class="job-requirements" id="job-detail-requirements">
+            <h4>Requirements</h4>
+            <ul id="job-requirements-list" data-bind="job-requirements">
+              <!-- Requirements listed here -->
+            </ul>
+          </div>
+          <div class="job-nice-to-have" id="job-detail-nice-to-have">
+            <h4>Nice to Have</h4>
+            <ul id="job-nice-list" data-bind="job-nice-to-have">
+              <!-- Nice to haves listed here -->
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Match Analysis Panel -->
+      <div role="tabpanel" id="jd-panel-match" class="tab-panel" aria-labelledby="jd-tab-match" hidden>
+        <div class="match-analysis">
+          <button type="button" id="run-match-btn" class="btn btn--primary btn--action">
+            <span class="btn-icon" aria-hidden="true">&#9678;</span>
+            Run Match Analysis
+          </button>
+          <div id="match-results" class="match-results" hidden>
+            <div class="match-score-visual">
+              <div class="match-score-circle" id="match-score-circle">
+                <span class="match-score-value" id="match-score-value">--</span>
+                <span class="match-score-label">Match</span>
+              </div>
+            </div>
+            <div class="match-details">
+              <div class="match-section">
+                <h4 class="match-section-title match-section-title--positive">Matching Skills</h4>
+                <div id="match-skills-matching" class="tags-container tags-container--match">
+                  <!-- Matching skills as tags -->
+                </div>
+              </div>
+              <div class="match-section">
+                <h4 class="match-section-title match-section-title--gap">Skill Gaps</h4>
+                <div id="match-skills-gaps" class="tags-container tags-container--gap">
+                  <!-- Gap skills as tags -->
+                </div>
+              </div>
+              <div class="match-section">
+                <h4 class="match-section-title">Recommendations</h4>
+                <div id="match-recommendations" class="match-recommendations">
+                  <!-- AI recommendations here -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tailored Resume Panel -->
+      <div role="tabpanel" id="jd-panel-resume" class="tab-panel" aria-labelledby="jd-tab-resume" hidden>
+        <div class="generated-content-panel">
+          <div class="generated-actions">
+            <button type="button" id="generate-resume-btn" class="btn btn--primary btn--action">
+              <span class="btn-icon" aria-hidden="true">&#9998;</span>
+              Generate Resume
+            </button>
+            <button type="button" id="copy-resume-btn" class="btn btn--secondary btn--small" hidden>
+              Copy
+            </button>
+            <button type="button" id="download-resume-btn" class="btn btn--secondary btn--small" hidden>
+              Download .txt
+            </button>
+            <button type="button" id="download-resume-docx-btn" class="btn btn--primary btn--small" hidden>
+              Download .docx
+            </button>
+          </div>
+          <div id="resume-preview" class="generated-preview">
+            <div class="empty-state">
+              <span class="empty-icon" aria-hidden="true">&#9999;</span>
+              <p>Click "Generate Resume" to create a resume tailored for this position.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cover Letter Panel -->
+      <div role="tabpanel" id="jd-panel-cover" class="tab-panel" aria-labelledby="jd-tab-cover" hidden>
+        <div class="generated-content-panel">
+          <div class="generated-actions">
+            <button type="button" id="generate-cover-btn" class="btn btn--primary btn--action">
+              <span class="btn-icon" aria-hidden="true">&#9998;</span>
+              Generate Cover Letter
+            </button>
+            <button type="button" id="copy-cover-btn" class="btn btn--secondary btn--small" hidden>
+              Copy
+            </button>
+            <button type="button" id="download-cover-btn" class="btn btn--secondary btn--small" hidden>
+              Download .txt
+            </button>
+            <button type="button" id="download-cover-docx-btn" class="btn btn--primary btn--small" hidden>
+              Download .docx
+            </button>
+          </div>
+          <div id="cover-preview" class="generated-preview">
+            <div class="empty-state">
+              <span class="empty-icon" aria-hidden="true">&#9999;</span>
+              <p>Click "Generate Cover Letter" to create a cover letter tailored for this position.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Documents Panel -->
+      <div role="tabpanel" id="jd-panel-documents" class="tab-panel" aria-labelledby="jd-tab-documents" hidden>
+        <div class="documents-history">
+          <h3 class="section-title">Generated Documents</h3>
+          <p class="page-description" style="margin-bottom: 16px;">All resumes and cover letters generated for this job.</p>
+          <div id="documents-list" class="documents-list">
+            <div class="empty-state">
+              <span class="empty-icon" aria-hidden="true">&#9999;</span>
+              <p>No documents generated yet. Generate a resume or cover letter first.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mock Interview Panel -->
+      <div role="tabpanel" id="jd-panel-interview" class="tab-panel" aria-labelledby="jd-tab-interview" hidden>
+        <div class="mock-interview-panel">
+          <div class="mock-interview-controls" id="interview-controls">
+            <button type="button" id="start-interview-btn" class="btn btn--primary btn--action">
+              <span class="btn-icon" aria-hidden="true">&#9998;</span>
+              Start Mock Interview
+            </button>
+            <p class="form-hint">Job Pal will ask you likely interview questions based on this job description.</p>
+          </div>
+
+          <div id="interview-chat" class="interview-chat" hidden>
+            <div id="interview-messages" class="interview-messages">
+              <!-- Chat messages rendered here -->
+            </div>
+            <div class="interview-input-area" id="interview-input-area">
+              <textarea id="interview-answer" class="form-textarea" rows="3" placeholder="Type your answer..."></textarea>
+              <div class="interview-input-actions">
+                <button type="button" id="send-answer-btn" class="btn btn--primary">Send Answer</button>
+                <button type="button" id="end-interview-btn" class="btn btn--danger btn--small">End Interview</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="interview-feedback" class="interview-feedback" hidden>
+            <!-- Feedback card rendered here -->
+          </div>
+
+          <div class="interview-history-section" id="interview-history-section">
+            <h4 class="section-title" style="margin-top: 24px;">Past Sessions</h4>
+            <div id="interview-history" class="interview-history">
+              <div class="empty-state">
+                <p>No past interview sessions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notes Section -->
+      <div class="job-notes-section">
+        <h3 class="section-title">Personal Notes</h3>
+        <textarea id="job-detail-notes" class="form-textarea" rows="4" placeholder="Your private notes about this opportunity..." data-bind="job-notes"></textarea>
+        <button type="button" id="save-job-notes-btn" class="btn btn--secondary btn--small">Save Notes</button>
+      </div>
+
+      <!-- Job Link & Delete -->
+      <div class="job-detail-footer">
+        <a href="#" id="job-detail-url" class="btn btn--ghost" target="_blank" rel="noopener noreferrer" data-bind="job-url">
+          Open Job Posting <span aria-hidden="true">&nearr;</span>
+        </a>
+        <button type="button" id="delete-job-btn" class="btn btn--danger" data-action="delete-job">
+          Delete Job
+        </button>
+      </div>
+    </section>
+
+
+    <!-- ───────────────────────────────────────────────
+         PAGE: HEADHUNTER
+         ─────────────────────────────────────────────── -->
+    <section id="headhunter" class="page" aria-labelledby="headhunter-heading">
+      <header class="page-header">
+        <h2 id="headhunter-heading" class="page-title">Job Scout</h2>
+        <div class="floral-accent" aria-hidden="true">&mdash; &#8226; &mdash;</div>
+        <p class="page-description">Your launchpad for finding the right opportunities. Browse job boards or let AI build a personalized search strategy.</p>
+      </header>
+
+      <!-- Always-visible Job Boards Directory -->
+      <div class="job-boards-directory">
+        <div class="job-boards-header">
+          <div>
+            <h3 class="section-title">Job Boards</h3>
+            <p class="job-boards-subtitle">Quick links to the top job boards &mdash; start your search here.</p>
+          </div>
+          <button type="button" id="add-board-btn" class="btn btn--secondary btn--small">
+            <span class="btn-icon" aria-hidden="true">+</span> Add Board
+          </button>
+        </div>
+
+        <!-- Add Board Form (hidden by default) -->
+        <form id="add-board-form" class="add-board-form" hidden>
+          <input type="text" id="board-name" class="form-input" placeholder="Board name" required>
+          <input type="url" id="board-url" class="form-input" placeholder="https://..." required>
+          <input type="text" id="board-desc" class="form-input" placeholder="Short description (optional)">
+          <div class="add-board-actions">
+            <button type="submit" class="btn btn--primary btn--small">Save</button>
+            <button type="button" id="cancel-board-btn" class="btn btn--ghost btn--small">Cancel</button>
+          </div>
+        </form>
+
+        <div class="job-boards-grid" id="job-boards-grid">
+          <a href="https://www.linkedin.com/jobs/" target="_blank" rel="noopener noreferrer" class="job-board-card">
+            <span class="job-board-icon">in</span>
+            <span class="job-board-name">LinkedIn Jobs</span>
+            <span class="job-board-desc">Professional network & jobs</span>
+          </a>
+          <a href="https://www.indeed.com/" target="_blank" rel="noopener noreferrer" class="job-board-card">
+            <span class="job-board-icon">&#9758;</span>
+            <span class="job-board-name">Indeed</span>
+            <span class="job-board-desc">Largest job aggregator</span>
+          </a>
+          <a href="https://www.glassdoor.com/Job/index.htm" target="_blank" rel="noopener noreferrer" class="job-board-card">
+            <span class="job-board-icon">&#9826;</span>
+            <span class="job-board-name">Glassdoor</span>
+            <span class="job-board-desc">Jobs + salary reviews</span>
+          </a>
+          <a href="https://www.ziprecruiter.com/" target="_blank" rel="noopener noreferrer" class="job-board-card">
+            <span class="job-board-icon">&#9889;</span>
+            <span class="job-board-name">ZipRecruiter</span>
+            <span class="job-board-desc">AI-matched job alerts</span>
+          </a>
+          <a href="https://wellfound.com/" target="_blank" rel="noopener noreferrer" class="job-board-card">
+            <span class="job-board-icon">&#9733;</span>
+            <span class="job-board-name">Wellfound</span>
+            <span class="job-board-desc">Startup & tech jobs</span>
+          </a>
+          <a href="https://www.dice.com/" target="_blank" rel="noopener noreferrer" class="job-board-card">
+            <span class="job-board-icon">&#9862;</span>
+            <span class="job-board-name">Dice</span>
+            <span class="job-board-desc">Tech & IT careers</span>
+          </a>
+          <a href="https://www.flexjobs.com/" target="_blank" rel="noopener noreferrer" class="job-board-card">
+            <span class="job-board-icon">&#8962;</span>
+            <span class="job-board-name">FlexJobs</span>
+            <span class="job-board-desc">Remote & flexible work</span>
+          </a>
+          <a href="https://weworkremotely.com/" target="_blank" rel="noopener noreferrer" class="job-board-card">
+            <span class="job-board-icon">&#127758;</span>
+            <span class="job-board-name">We Work Remotely</span>
+            <span class="job-board-desc">Remote-only listings</span>
+          </a>
+          <a href="https://builtin.com/jobs" target="_blank" rel="noopener noreferrer" class="job-board-card">
+            <span class="job-board-icon">&#9881;</span>
+            <span class="job-board-name">Built In</span>
+            <span class="job-board-desc">Tech hubs & startups</span>
+          </a>
+          <a href="https://www.usajobs.gov/" target="_blank" rel="noopener noreferrer" class="job-board-card">
+            <span class="job-board-icon">&#9734;</span>
+            <span class="job-board-name">USAJobs</span>
+            <span class="job-board-desc">Federal government jobs</span>
+          </a>
+          <!-- Custom boards render here -->
+        </div>
+      </div>
+
+      <!-- AI Scout Search -->
+      <div class="headhunter-search">
+        <h3 class="section-title">AI-Powered Job Scout</h3>
+        <p class="scout-subtitle">Describe what you're looking for and AI will build a personalized search strategy with tailored queries, target companies, and job title suggestions.</p>
+        <form id="headhunter-form" class="headhunter-form">
+          <div class="form-group">
+            <label for="headhunter-query" class="form-label">What kind of job are you looking for?</label>
+            <input type="text" id="headhunter-query" name="query" class="form-input form-input--large" placeholder="e.g. remote product design roles at startups in fintech">
+          </div>
+          <div class="form-group form-group--inline">
+            <label class="form-checkbox-label">
+              <input type="checkbox" id="headhunter-use-profile" name="use-profile" class="form-checkbox" checked>
+              Use my profile to personalize results
+            </label>
+          </div>
+          <div class="form-actions form-actions--left">
+            <button type="submit" id="headhunter-search-btn" class="btn btn--primary btn--large">
+              <span class="btn-icon" aria-hidden="true">&#9737;</span>
+              Scout Jobs
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- AI Results Area -->
+      <div id="headhunter-results" class="headhunter-results" hidden>
+
+        <!-- Strategy Summary -->
+        <div class="headhunter-section headhunter-section--full" id="headhunter-summary-section">
+          <h3 class="section-title">Strategy Overview</h3>
+          <p id="headhunter-summary" class="scout-summary"></p>
+        </div>
+
+        <!-- Recommended Job Titles -->
+        <div class="headhunter-section" id="headhunter-titles-section">
+          <h3 class="section-title">Recommended Job Titles</h3>
+          <p class="scout-section-hint">Click a title to search for it on LinkedIn.</p>
+          <div id="headhunter-titles" class="tags-container tags-container--large">
+          </div>
+        </div>
+
+        <!-- Personalized Search Queries -->
+        <div class="headhunter-section" id="headhunter-queries-section">
+          <h3 class="section-title">Personalized Search Queries</h3>
+          <div id="headhunter-queries" class="headhunter-queries-list">
+          </div>
+        </div>
+
+        <!-- Target Companies -->
+        <div class="headhunter-section" id="headhunter-companies-section">
+          <h3 class="section-title">Target Companies</h3>
+          <div id="headhunter-companies" class="headhunter-companies-list">
+          </div>
+        </div>
+
+        <!-- Niche/Industry Job Boards -->
+        <div class="headhunter-section" id="headhunter-niche-section">
+          <h3 class="section-title">Industry-Specific Boards</h3>
+          <div id="headhunter-niche-boards" class="headhunter-links-grid">
+          </div>
+        </div>
+
+        <!-- Search Tips -->
+        <div class="headhunter-section headhunter-section--full" id="headhunter-tips-section">
+          <h3 class="section-title">Search Tips</h3>
+          <ul id="headhunter-tips" class="scout-tips-list">
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ───────────────────────────────────────────────
+         PAGE: CONTACTS
+         ─────────────────────────────────────────────── -->
+    <section id="contacts" class="page" aria-labelledby="contacts-heading">
+      <header class="page-header">
+        <h2 id="contacts-heading" class="page-title">Contacts</h2>
+        <div class="floral-accent" aria-hidden="true">&mdash; &#8226; &mdash;</div>
+        <p class="page-description">Keep track of recruiters, hiring managers, and other connections.</p>
+      </header>
+
+      <div class="contacts-toolbar">
+        <button type="button" id="add-contact-btn" class="btn btn--primary btn--action">
+          <span class="btn-icon" aria-hidden="true">+</span>
+          Add Contact
+        </button>
+        <div class="filter-group">
+          <input type="text" id="contacts-search" class="form-input form-input--tag" placeholder="Search contacts..." style="min-width: 220px;">
+        </div>
+      </div>
+
+      <!-- Contacts List View -->
+      <div id="contacts-list-view">
+        <div id="contacts-grid" class="contacts-grid">
+          <div class="empty-state">
+            <span class="empty-icon" aria-hidden="true">&#9742;</span>
+            <p>No contacts yet. Add a recruiter or hiring manager to get started!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Detail View (hidden by default) -->
+      <div id="contact-detail-view" class="contact-detail-view" hidden>
+        <button type="button" id="contact-back-btn" class="btn btn--ghost btn--back">
+          <span aria-hidden="true">&larr;</span> Back to Contacts
+        </button>
+
+        <div class="contact-detail-layout">
+          <div class="contact-detail-info">
+            <div class="contact-detail-header">
+              <h3 id="contact-detail-name" class="contact-detail-name">Contact Name</h3>
+              <div class="contact-detail-meta">
+                <p id="contact-detail-role" class="contact-detail-role"></p>
+                <p id="contact-detail-company" class="contact-detail-company"></p>
+              </div>
+            </div>
+            <div class="contact-detail-fields">
+              <div class="contact-field" id="contact-field-email">
+                <span class="contact-field-label">Email</span>
+                <span class="contact-field-value" id="contact-detail-email"></span>
+              </div>
+              <div class="contact-field" id="contact-field-phone">
+                <span class="contact-field-label">Phone</span>
+                <span class="contact-field-value" id="contact-detail-phone"></span>
+              </div>
+              <div class="contact-field" id="contact-field-linkedin">
+                <span class="contact-field-label">LinkedIn</span>
+                <span class="contact-field-value" id="contact-detail-linkedin"></span>
+              </div>
+            </div>
+            <div class="contact-detail-jobs" id="contact-detail-jobs">
+              <h4 class="section-title">Linked Jobs</h4>
+              <div id="contact-jobs-list"></div>
+            </div>
+            <div class="contact-detail-actions">
+              <button type="button" id="edit-contact-btn" class="btn btn--secondary btn--small">Edit</button>
+              <button type="button" id="delete-contact-btn" class="btn btn--danger btn--small">Delete</button>
+            </div>
+          </div>
+
+          <div class="contact-detail-notes">
+            <h4 class="section-title">Conversation Notes</h4>
+            <div class="contact-note-form">
+              <textarea id="contact-note-input" class="form-textarea" rows="3" placeholder="Add a note about your conversation..."></textarea>
+              <button type="button" id="add-note-btn" class="btn btn--primary btn--small">Add Note</button>
+            </div>
+            <div id="contact-notes-timeline" class="notes-timeline">
+              <div class="empty-state">
+                <p>No notes yet.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ═══════════════════════════════════════════════════
+       AI CHAT PANEL
+       ═══════════════════════════════════════════════════ -->
+
+  <!-- Chat Toggle Button -->
+  <button id="chat-toggle" class="chat-toggle" aria-label="Open chat with Job Pal" aria-expanded="false" aria-controls="chat-panel">
+    <span class="chat-toggle-icon" aria-hidden="true">&#9998;</span>
+    <span class="chat-toggle-label">Chat with Job Pal</span>
+  </button>
+
+  <!-- Chat Slide-Out Panel -->
+  <aside id="chat-panel" class="chat-panel" aria-label="Chat with Job Pal" hidden>
+    <header class="chat-header">
+      <div class="chat-header-info">
+        <span class="chat-logo" aria-hidden="true">&#9998;</span>
+        <h3 class="chat-title">Job Pal</h3>
+      </div>
+      <button id="chat-close" class="btn btn--ghost btn--icon chat-close-btn" aria-label="Close chat">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </header>
+
+    <!-- Chat Messages -->
+    <div id="chat-messages" class="chat-messages" role="log" aria-live="polite">
+      <div class="chat-message chat-message--assistant">
+        <div class="chat-avatar" aria-hidden="true">&#9998;</div>
+        <div class="chat-bubble">
+          <p>Hi there! I'm Job Pal, your career companion. How can I help you today?</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Suggested Prompts -->
+    <div class="chat-suggestions" id="chat-suggestions">
+      <button class="chat-suggestion-btn" data-prompt="Help me prep for an interview">Help me prep for an interview</button>
+      <button class="chat-suggestion-btn" data-prompt="Review my resume">Review my resume</button>
+      <button class="chat-suggestion-btn" data-prompt="Job search strategy">Job search strategy</button>
+    </div>
+
+    <!-- Chat Input -->
+    <form id="chat-form" class="chat-input-area">
+      <textarea id="chat-input" class="chat-input" rows="2" placeholder="Ask Job Pal anything..." aria-label="Chat message input"></textarea>
+      <button type="submit" id="chat-send" class="btn btn--primary btn--icon chat-send-btn" aria-label="Send message">
+        <span aria-hidden="true">&#10148;</span>
+      </button>
+    </form>
+  </aside>
+
+  <!-- Chat Overlay (for mobile) -->
+  <div id="chat-overlay" class="chat-overlay" hidden></div>
+
+
+  <!-- ═══════════════════════════════════════════════════
+       MODAL OVERLAY
+       ═══════════════════════════════════════════════════ -->
+  <div id="modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal-content">
+      <header class="modal-header">
+        <h3 id="modal-title" class="modal-title">Confirm</h3>
+        <button id="modal-close" class="btn btn--ghost btn--icon modal-close-btn" aria-label="Close modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </header>
+      <div id="modal-body" class="modal-body">
+        <!-- Dynamic modal content -->
+      </div>
+      <footer id="modal-footer" class="modal-footer">
+        <button id="modal-cancel" class="btn btn--ghost">Cancel</button>
+        <button id="modal-confirm" class="btn btn--primary">Confirm</button>
+      </footer>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════
+       TOAST NOTIFICATIONS
+       ═══════════════════════════════════════════════════ -->
+  <div id="toast-container" class="toast-container" role="status" aria-live="polite" aria-atomic="true">
+    <!-- Toast messages are injected here dynamically -->
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════
+       LOADING OVERLAY (shown during AI operations)
+       ═══════════════════════════════════════════════════ -->
+  <div id="loading-overlay" class="loading-overlay" hidden>
+    <div class="loading-spinner">
+      <span class="loading-flower" aria-hidden="true">&#9998;</span>
+      <p class="loading-text">Working on it...</p>
+    </div>
+  </div>
+
+
+  <!-- JavaScript Module -->
+  <script type="module" src="js/app.js"></script>
+
+</body>
+</html>
