@@ -347,8 +347,34 @@ app.post('/api/resume/parse', upload.single('resume'), async (req, res) => {
       } catch (pdfErr) {
         return res.status(400).json({ error: 'Could not read this PDF. It may be scanned/image-based. Try a .txt file or paste your resume instead.' });
       }
+    } else if (mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || filename.endsWith('.docx')) {
+      // Parse .docx using PizZip
+      try {
+        const zip = new PizZip(req.file.buffer);
+        const xml = zip.file('word/document.xml')?.asText();
+        if (!xml) {
+          return res.status(400).json({ error: 'Could not read this .docx file. It may be corrupted.' });
+        }
+        // Strip XML tags to get plain text, normalize whitespace
+        text = xml
+          .replace(/<\/w:p[^>]*>/g, '\n')       // paragraph breaks → newlines
+          .replace(/<\/w:tr[^>]*>/g, '\n')       // table row breaks → newlines
+          .replace(/<w:tab\/>/g, '\t')            // tabs
+          .replace(/<[^>]+>/g, '')                // strip all remaining XML tags
+          .replace(/&amp;/g, '&')
+          .replace(/&lt;/g, '<')
+          .replace(/&gt;/g, '>')
+          .replace(/&quot;/g, '"')
+          .replace(/&apos;/g, "'")
+          .replace(/[ \t]+/g, ' ')               // collapse multiple spaces
+          .replace(/\n /g, '\n')                  // trim leading spaces on lines
+          .replace(/\n{3,}/g, '\n\n')             // collapse excessive newlines
+          .trim();
+      } catch (docxErr) {
+        return res.status(400).json({ error: 'Could not read this .docx file. Try a .txt or .pdf file instead.' });
+      }
     } else {
-      // Treat as plain text (.txt, .doc, .docx fallback)
+      // Treat as plain text (.txt fallback)
       text = req.file.buffer.toString('utf-8');
     }
 
