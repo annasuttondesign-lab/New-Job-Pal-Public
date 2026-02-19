@@ -1,0 +1,168 @@
+name: Weekly Refactoring Audit
+
+on:
+  schedule:
+    - cron: '0 8 * * 0'  # Every Sunday at 8 AM UTC
+  workflow_dispatch:       # Manual trigger for testing
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+
+    # ── Baselines ──────────────────────────────────────────────────────────
+    # Update these as you address issues. The workflow only creates an issue
+    # when a metric EXCEEDS its baseline, so known debt won't spam you.
+    env:
+      BASELINE_LARGE_FILES: 2        # server.js (1609 lines) + app.js
+      BASELINE_TODOS: 0              # Current known TODO/HACK/FIXME count
+      BASELINE_VULN_HIGH: 0          # Known high-severity npm vulnerabilities
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci || true
+
+      - name: Check for large files (over 500 lines)
+        id: large-files
+        run: |
+          echo "## Large Files (>500 lines)" > /tmp/audit-large.txt
+          COUNT=0
+          for f in $(find . -name '*.js' -not -path './node_modules/*' -not -path './.git/*'); do
+            LINES=$(wc -l < "$f")
+            if [ "$LINES" -gt 500 ]; then
+              echo "- **$f**: $LINES lines" >> /tmp/audit-large.txt
+              COUNT=$((COUNT + 1))
+            fi
+          done || true
+          echo "count=$COUNT" >> $GITHUB_OUTPUT
+          echo "Found $COUNT large files"
+
+      - name: Check for TODO/HACK/FIXME comments
+        id: todos
+        run: |
+          echo "## TODO/HACK/FIXME Comments" > /tmp/audit-todos.txt
+          COUNT=0
+          for f in $(find . -name '*.js' -not -path './node_modules/*' -not -path './.git/*'); do
+            MATCHES=$(grep -n 'TODO\|HACK\|FIXME' "$f" 2>/dev/null || true)
+            if [ -n "$MATCHES" ]; then
+              echo "### $f" >> /tmp/audit-todos.txt
+              echo "$MATCHES" | while read line; do
+                echo "- $line" >> /tmp/audit-todos.txt
+                COUNT=$((COUNT + 1))
+              done
+            fi
+          done || true
+          # Recount properly
+          TOTAL=$(find . -name '*.js' -not -path './node_modules/*' -not -path './.git/*' -exec grep -c 'TODO\|HACK\|FIXME' {} + 2>/dev/null | awk -F: '{sum += $NF} END {print sum}') || true
+          TOTAL=${TOTAL:-0}
+          echo "count=$TOTAL" >> $GITHUB_OUTPUT
+          echo "Found $TOTAL TODO/HACK/FIXME comments"
+
+      - name: Check npm audit
+        id: vulns
+        run: |
+          echo "## npm Audit" > /tmp/audit-vulns.txt
+          HIGH_COUNT=0
+          if npm audit --json > /tmp/npm-audit.json 2>/dev/null; then
+            echo "No vulnerabilities found." >> /tmp/audit-vulns.txt
+          else
+            HIGH_COUNT=$(node -e "
+              const data = require('/tmp/npm-audit.json');
+              const meta = data.metadata || {};
+              const vulns = meta.vulnerabilities || {};
+              const high = (vulns.high || 0) + (vulns.critical || 0);
+              console.log(high);
+            " 2>/dev/null || echo "0")
+            echo "High/Critical vulnerabilities: $HIGH_COUNT" >> /tmp/audit-vulns.txt
+          fi || true
+          echo "count=$HIGH_COUNT" >> $GITHUB_OUTPUT
+          echo "Found $HIGH_COUNT high/critical vulnerabilities"
+
+      - name: Evaluate against baselines
+        id: evaluate
+        run: |
+          LARGE=${{ steps.large-files.outputs.count }}
+          TODOS=${{ steps.todos.outputs.count }}
+          VULNS=${{ steps.vulns.outputs.count }}
+
+          ISSUES=""
+          if [ "$LARGE" -gt "$BASELINE_LARGE_FILES" ]; then
+            ISSUES="${ISSUES}large_files,"
+          fi
+          if [ "$TODOS" -gt "$BASELINE_TODOS" ]; then
+            ISSUES="${ISSUES}todos,"
+          fi
+          if [ "$VULNS" -gt "$BASELINE_VULN_HIGH" ]; then
+            ISSUES="${ISSUES}vulns,"
+          fi
+
+          if [ -z "$ISSUES" ]; then
+            echo "create_issue=false" >> $GITHUB_OUTPUT
+            echo "All metrics within baseline. No issue needed."
+          else
+            echo "create_issue=true" >> $GITHUB_OUTPUT
+            echo "issues=$ISSUES" >> $GITHUB_OUTPUT
+            echo "Metrics exceeded baseline: $ISSUES"
+          fi
+
+      - name: Create GitHub Issue if needed
+        if: steps.evaluate.outputs.create_issue == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+
+            let largeMd = '', todosMd = '', vulnsMd = '';
+            try { largeMd = fs.readFileSync('/tmp/audit-large.txt', 'utf-8'); } catch {}
+            try { todosMd = fs.readFileSync('/tmp/audit-todos.txt', 'utf-8'); } catch {}
+            try { vulnsMd = fs.readFileSync('/tmp/audit-vulns.txt', 'utf-8'); } catch {}
+
+            const large = parseInt('${{ steps.large-files.outputs.count }}') || 0;
+            const todos = parseInt('${{ steps.todos.outputs.count }}') || 0;
+            const vulns = parseInt('${{ steps.vulns.outputs.count }}') || 0;
+
+            const body = `## 🔍 Weekly Refactoring Audit
+
+            **Metrics that exceeded baseline:**
+
+            | Metric | Current | Baseline | Status |
+            |--------|---------|----------|--------|
+            | Large files (>500 lines) | ${large} | ${process.env.BASELINE_LARGE_FILES} | ${large > parseInt(process.env.BASELINE_LARGE_FILES) ? '❌ Over' : '✅ OK'} |
+            | TODO/HACK/FIXME comments | ${todos} | ${process.env.BASELINE_TODOS} | ${todos > parseInt(process.env.BASELINE_TODOS) ? '❌ Over' : '✅ OK'} |
+            | High/Critical vulns | ${vulns} | ${process.env.BASELINE_VULN_HIGH} | ${vulns > parseInt(process.env.BASELINE_VULN_HIGH) ? '❌ Over' : '✅ OK'} |
+
+            ### Details
+
+            ${largeMd}
+
+            ${todosMd}
+
+            ${vulnsMd}
+
+            ### 📋 Claude Code Remediation Prompt
+
+            Paste this into Claude Code to fix:
+
+            \`\`\`
+            The weekly refactoring audit found issues that exceed our baselines.
+            ${large > parseInt(process.env.BASELINE_LARGE_FILES) ? `- There are ${large} files over 500 lines. Consider splitting server.js into route modules.\n` : ''}${todos > parseInt(process.env.BASELINE_TODOS) ? `- There are ${todos} TODO/HACK/FIXME comments. Please review and resolve them.\n` : ''}${vulns > parseInt(process.env.BASELINE_VULN_HIGH) ? `- There are ${vulns} high/critical npm vulnerabilities. Run npm audit fix.\n` : ''}
+            Please address these issues in priority order.
+            \`\`\`
+
+            ---
+            *Created automatically by the refactor-audit workflow.*`;
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '🔍 Weekly refactoring audit — action needed',
+              body: body,
+              labels: ['automated-audit', 'refactoring']
+            });

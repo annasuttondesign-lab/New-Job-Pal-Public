@@ -1,0 +1,95 @@
+name: Documentation Drift Audit
+
+# Triggers when doc-relevant code is pushed to main
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'server.js'
+      - 'public/**'
+      - '.env.example'
+      - 'package.json'
+
+jobs:
+  check-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Regenerate all inventories
+        run: npm run gen:all
+
+      - name: Check for documentation drift
+        id: drift-check
+        run: |
+          # Check if any generated docs differ from committed versions
+          DRIFT=""
+
+          for file in docs/_generated/api-routes.md docs/_generated/models.md docs/_generated/env-vars.md; do
+            if git diff --exit-code "$file" > /dev/null 2>&1; then
+              echo "✅ $file is up to date"
+            else
+              echo "❌ $file has drifted"
+              DRIFT="${DRIFT}\n### ${file}\n\`\`\`diff\n$(git diff "$file")\n\`\`\`\n"
+            fi
+          done || true
+
+          if [ -z "$DRIFT" ]; then
+            echo "has_drift=false" >> $GITHUB_OUTPUT
+            echo "All documentation is up to date!"
+          else
+            echo "has_drift=true" >> $GITHUB_OUTPUT
+            # Save drift details to a file (multi-line output)
+            echo -e "$DRIFT" > /tmp/drift-details.txt
+          fi
+
+      - name: Create GitHub Issue for drift
+        if: steps.drift-check.outputs.has_drift == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let driftDetails = '';
+            try {
+              driftDetails = fs.readFileSync('/tmp/drift-details.txt', 'utf-8');
+            } catch (e) {
+              driftDetails = 'Could not read drift details.';
+            }
+
+            const body = `## 📚 Documentation Drift Detected
+
+            Code was pushed to \`main\` that changed doc-relevant files, but the generated documentation was not regenerated.
+
+            ### Diffs
+
+            ${driftDetails}
+
+            ### 📋 Claude Code Remediation Prompt
+
+            Paste this into Claude Code to fix:
+
+            \`\`\`
+            The documentation inventories are out of date. Please run \`npm run gen:all\` to regenerate
+            docs/_generated/api-routes.md, docs/_generated/models.md, and docs/_generated/env-vars.md.
+            Then commit the updated files.
+            \`\`\`
+
+            ---
+            *Created automatically by the docs-audit workflow.*`;
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '📚 Documentation drift detected',
+              body: body,
+              labels: ['automated-audit', 'documentation']
+            });
