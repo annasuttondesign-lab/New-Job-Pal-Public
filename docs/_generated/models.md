@@ -15,10 +15,10 @@ This project uses **JSON file-based storage** (no database). All data files live
 | resumes.json | Array | 0 |
 | cover-letters.json | Array | 0 |
 | writing-samples.json | Array | 0 |
-| document-templates.json | Array | 2 |
+| document-templates.json | Array | 0 |
 | contacts.json | Array | 0 |
 | mock-interviews.json | Array | 0 |
-| custom-boards.json | Array | 1 |
+| custom-boards.json | Array | 0 |
 
 ---
 
@@ -73,14 +73,7 @@ This project uses **JSON file-based storage** (no database). All data files live
 **File:** `data/document-templates.json`  
 **Type:** Array of records  
 
-| Field | Type | Notes |
-|-------|------|-------|
-| id | string (UUID) |  |
-| type | string |  |
-| originalName | string |  |
-| filename | string |  |
-| placeholders | array of strings |  |
-| uploadedAt | string (date) |  |
+*Empty by default. Schema inferred from code usage.*
 
 ## Contacts
 
@@ -101,11 +94,5 @@ This project uses **JSON file-based storage** (no database). All data files live
 **File:** `data/custom-boards.json`  
 **Type:** Array of records  
 
-| Field | Type | Notes |
-|-------|------|-------|
-| id | string (UUID) |  |
-| name | string |  |
-| url | string |  |
-| description | string |  |
-| createdAt | string (date) |  |
+*Empty by default. Schema inferred from code usage.*
 

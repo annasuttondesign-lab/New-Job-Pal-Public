@@ -20,8 +20,8 @@ A personal job search companion powered by AI. Track applications, generate tail
 ## Quick Start
 
 ```bash
-git clone https://github.com/yourusername/new-job-pal.git
-cd new-job-pal
+git clone https://github.com/annasuttondesign-lab/New-Job-Pal-Public.git
+cd New-Job-Pal-Public
 npm install
 ```
 
