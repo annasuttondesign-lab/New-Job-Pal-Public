@@ -2,7 +2,7 @@
 
 > **Auto-generated** — Do not edit manually.
 > Run `npm run gen:api-routes` to regenerate.
-> Generated: 2026-02-19
+> Generated: 2026-02-20
 
 **Total routes: 41**
 

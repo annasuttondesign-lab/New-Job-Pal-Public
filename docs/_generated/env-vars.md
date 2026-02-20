@@ -2,7 +2,7 @@
 
 > **Auto-generated** — Do not edit manually.
 > Run `npm run gen:env` to regenerate.
-> Generated: 2026-02-19
+> Generated: 2026-02-20
 
 **Total variables: 2** (2 documented in .env.example, 0 undocumented)
 
